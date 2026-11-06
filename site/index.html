@@ -162,6 +162,18 @@
     .who .horse img { width: 100%; max-width: 380px; margin: 0 auto; -webkit-mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 78%); mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 78%); }
     .who .horse::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 50%, rgba(225,29,46,.18), rgba(225,29,46,0) 70%); pointer-events: none; }
 
+    .band { background: var(--red); color: #fff; position: relative; overflow: hidden; }
+    .band .wrap { display: grid; gap: 28px; grid-template-columns: 1fr; align-items: center; padding-top: 64px; padding-bottom: 64px; position: relative; }
+    @media (min-width: 900px) { .band .wrap { grid-template-columns: minmax(0, 1fr) auto; } }
+    .band h2 { color: #fff; margin-top: 14px; }
+    .band .label { color: rgba(255,255,255,.85); }
+    .band p { margin: 16px 0 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; color: rgba(255,255,255,.9); max-width: 620px; }
+    .band .btn.white { background: #fff; color: #0A0A0A; }
+    .band .btn.white:hover { background: #0A0A0A; color: #fff; }
+    .band .btn.line { border-color: rgba(255,255,255,.55); color: #fff; }
+    .band .btn.line:hover { background: rgba(255,255,255,.12); }
+    .band .emblem { position: absolute; right: -40px; top: -20px; height: 140%; opacity: .14; pointer-events: none; }
+    .band .emblem img { height: 100%; width: auto; }
     footer { padding: 40px 0 48px; color: var(--text-5); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
     footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between; }
     footer a:hover { color: var(--white); }
@@ -183,6 +195,7 @@
       <a class="hide-m" href="#tela"><span lang-block="pt">O produto</span><span lang-block="en">Product</span></a>
       <a class="hide-m" href="#experimente"><span lang-block="pt">Experimente</span><span lang-block="en">Try it</span></a>
       <a class="hide-m" href="#feito"><span lang-block="pt">Como é feito</span><span lang-block="en">How it's built</span></a>
+      <a class="hide-m" href="#contato"><span lang-block="pt">Contato</span><span lang-block="en">Contact</span></a>
       <div class="lang" role="group" aria-label="Idioma / Language">
         <button type="button" data-set-lang="pt" aria-pressed="true">PT</button>
         <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
@@ -217,7 +230,7 @@
     </div>
     <div class="shot" data-reveal>
       <div class="bar"><i></i><i></i><i></i><span>app.ferraia.com</span></div>
-      <img src="/assets/telas/forno-nove-inicio.webp" alt="Tela Início do Ferra na Pizzaria Forno Nove: vendido hoje, recebido, em aberto e o que o negócio avisa" width="1366" height="768" loading="eager" />
+      <img data-pt="/assets/telas/forno-nove-inicio.webp" data-en="/assets/telas/harbour-and-hound-inicio.webp" src="/assets/telas/forno-nove-inicio.webp" alt="Ferra home screen: sold today, received, open now and what the business warns about" width="1366" height="768" loading="eager" />
     </div>
   </div>
 </section>
@@ -235,15 +248,15 @@
     </p>
     <div class="trio">
       <figure data-reveal>
-        <img src="/assets/telas/forno-nove-inicio.webp" alt="Início da Pizzaria Forno Nove" loading="lazy" />
+        <img data-pt="/assets/telas/forno-nove-inicio.webp" data-en="/assets/telas/forno-nove-en-inicio.webp" src="/assets/telas/forno-nove-inicio.webp" alt="Início da Pizzaria Forno Nove" loading="lazy" />
         <figcaption><b>Pizzaria Forno Nove</b><span lang-block="pt">Vendido e recebido hoje, e o aviso: a Coca-Cola 2 L acaba segunda, no ritmo das últimas quatro semanas.</span><span lang-block="en">Sold and received today, and the warning: Coke 2 L runs out on Monday at the pace of the last four weeks.</span></figcaption>
       </figure>
       <figure data-reveal>
-        <img src="/assets/telas/patas-e-cia-inicio.webp" alt="Início do Patas &amp; Cia Pet Shop" loading="lazy" />
+        <img data-pt="/assets/telas/patas-e-cia-inicio.webp" data-en="/assets/telas/patas-e-cia-en-inicio.webp" src="/assets/telas/patas-e-cia-inicio.webp" alt="Início do Patas &amp; Cia Pet Shop" loading="lazy" />
         <figcaption><b>Patas &amp; Cia Pet Shop</b><span lang-block="pt">A mesma tela, com o que um pet shop precisa: o antipulgas que vai acabar e as vacinas atrasadas, com o botão de avisar o tutor.</span><span lang-block="en">The same screen, with what a pet shop needs: the flea treatment running out and the overdue vaccines, with a button to message the owner.</span></figcaption>
       </figure>
       <figure data-reveal>
-        <img src="/assets/telas/baia-de-espuma-inicio.webp" alt="Início da Barbearia Baía de Espuma" loading="lazy" />
+        <img data-pt="/assets/telas/baia-de-espuma-inicio.webp" data-en="/assets/telas/baia-de-espuma-en-inicio.webp" src="/assets/telas/baia-de-espuma-inicio.webp" alt="Início da Barbearia Baía de Espuma" loading="lazy" />
         <figcaption><b>Barbearia Baía de Espuma</b><span lang-block="pt">A mesma tela numa barbearia: o dia por barbeiro, hora marcada e fila, e o cliente marcando sozinho pelo link.</span><span lang-block="en">The same screen in a barbershop: the day per barber, appointments and queue, and customers booking themselves through the link.</span></figcaption>
       </figure>
     </div>
@@ -289,7 +302,7 @@
     </p>
     <div class="portas">
       <a class="porta" href="https://app.ferraia.com/p/forno-nove" data-reveal>
-        <div class="phone"><img src="/assets/telas/porta-forno-nove.webp" alt="" loading="lazy" /></div>
+        <div class="phone"><img data-pt="/assets/telas/porta-forno-nove.webp" data-en="/assets/telas/porta-forno-nove-en.webp" src="/assets/telas/porta-forno-nove.webp" alt="" loading="lazy" /></div>
         <div>
           <span class="label"><span lang-block="pt">Pizzaria</span><span lang-block="en">Pizzeria</span></span>
           <h3>Forno Nove</h3>
@@ -298,7 +311,7 @@
         </div>
       </a>
       <a class="porta" href="https://app.ferraia.com/p/baia-de-espuma" data-reveal>
-        <div class="phone"><img src="/assets/telas/porta-baia-de-espuma.webp" alt="" loading="lazy" /></div>
+        <div class="phone"><img data-pt="/assets/telas/porta-baia-de-espuma.webp" data-en="/assets/telas/porta-baia-de-espuma-en.webp" src="/assets/telas/porta-baia-de-espuma.webp" alt="" loading="lazy" /></div>
         <div>
           <span class="label"><span lang-block="pt">Barbearia</span><span lang-block="en">Barbershop</span></span>
           <h3>Baía de Espuma</h3>
@@ -334,8 +347,8 @@
       </a>
     </div>
     <p class="note">
-      <span lang-block="pt">Pessoas, telefones e endereços dos sete negócios são inventados. Fora do horário de cada um, a página diz quando abre. Hoje o Ferra entra por convite: os primeiros negócios de verdade começam em Salvador em dezembro de 2026.</span>
-      <span lang-block="en">People, phone numbers and addresses of the seven businesses are made up. Outside each one's opening hours the page says when it opens. Ferra is invite-only today: the first real businesses go live in Salvador, Brazil, in December 2026.</span>
+      <span lang-block="pt">Pessoas, telefones e endereços dos sete negócios são inventados. Fora do horário de cada um, a página diz quando abre. Hoje o Ferra entra por convite: os primeiros negócios de verdade começam em Salvador em dezembro de 2026. Quer o seu lá? <a href="#contato" style="color:var(--white);text-decoration:underline">Fala comigo</a>.</span>
+      <span lang-block="en">People, phone numbers and addresses of the seven businesses are made up. Outside each one's opening hours the page says when it opens. Ferra is invite-only today: the first real businesses go live in Salvador, Brazil, in December 2026. Want yours in? <a href="#contato" style="color:var(--white);text-decoration:underline">Get in touch</a>.</span>
     </p>
   </div>
 </section>
@@ -396,10 +409,31 @@
   </div>
 </section>
 
+<section class="band" id="contato">
+  <div class="emblem" aria-hidden="true"><img src="/assets/emblema-branco.svg" alt="" /></div>
+  <div class="wrap">
+    <div>
+      <span class="label"><span lang-block="pt">Para o seu negócio</span><span lang-block="en">For your business</span></span>
+      <h2>
+        <span lang-block="pt">Tem um negócio pequeno? Fala comigo.</span>
+        <span lang-block="en">Run a small business? Let's talk.</span>
+      </h2>
+      <p>
+        <span lang-block="pt">Pizzaria, pet shop, barbearia, depósito, salão, lava-jato. Em dezembro de 2026 os primeiros negócios de Salvador entram no Ferra, e eu monto cada um pessoalmente. Me chama no WhatsApp e me conta como é o seu dia.</span>
+        <span lang-block="en">Pizzeria, pet shop, barbershop, depot, salon, car wash. In December 2026 the first businesses in Salvador go live on Ferra, and I set each one up in person. Message me on WhatsApp and tell me how your day works.</span>
+      </p>
+    </div>
+    <div class="links">
+      <a class="btn white" href="https://wa.me/16047251622?text=Oi%2C%20Jo%C3%A3o!%20Vi%20o%20Ferra%20em%20ferraia.com%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." rel="noopener"><span lang-block="pt">WhatsApp +1 604 725-1622</span><span lang-block="en">WhatsApp +1 604 725-1622</span></a>
+      <a class="btn line" href="https://app.ferraia.com/p/forno-nove"><span lang-block="pt">Ver uma loja de exemplo</span><span lang-block="en">Open a sample store</span></a>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <span>© 2026 Ferra IA · ferraia.com</span>
-    <span><a href="https://app.ferraia.com/">app.ferraia.com</a> · <a href="https://app.ferraia.com/p/forno-nove"><span lang-block="pt">loja de exemplo</span><span lang-block="en">sample store</span></a> · <a href="https://github.com/joaoferrari12/metodo-agentic">metodo-agentic</a></span>
+    <span><a href="https://wa.me/16047251622" rel="noopener">WhatsApp +1 604 725-1622</a> · <a href="https://app.ferraia.com/">app.ferraia.com</a> · <a href="https://app.ferraia.com/p/forno-nove"><span lang-block="pt">loja de exemplo</span><span lang-block="en">sample store</span></a> · <a href="https://github.com/joaoferrari12/metodo-agentic">metodo-agentic</a></span>
   </div>
 </footer>
 
@@ -426,28 +460,28 @@
 
   // Tour tabs. Captures are from the live showcase businesses (fictional data), November 2026.
   var TABS = [
-    { k: 'inicio', url: 'app.ferraia.com/', img: 'forno-nove-inicio', phone: 'forno-nove-m-inicio',
+    { k: 'inicio', url: 'app.ferraia.com/', img: { pt: 'forno-nove-inicio', en: 'harbour-and-hound-inicio' }, phone: { pt: 'forno-nove-m-inicio', en: 'harbour-and-hound-m-inicio' },
       pt: ['Início', 'O que vendeu hoje, o que entrou, o que está em aberto, quem está devendo. E o negócio avisa: a ração que vai acabar no ritmo das últimas semanas, a cliente que vinha sempre e sumiu.'],
       en: ['Home', "Today's sales, what came in, what's still open, who owes. And the business warns you: the stock item that will run out at the recent pace, the regular customer who stopped coming."] },
-    { k: 'quadro', url: 'app.ferraia.com/quadro', img: 'forno-nove-quadro', phone: 'forno-nove-m-quadro',
+    { k: 'quadro', url: 'app.ferraia.com/quadro', img: { pt: 'forno-nove-quadro', en: 'harbour-and-hound-quadro' }, phone: { pt: 'forno-nove-m-quadro', en: 'harbour-and-hound-m-quadro' },
       pt: ['Quadro', 'Cada atendimento numa coluna, por etapa. Atrasou, fica vermelho. Tocar no botão leva para a etapa seguinte; o histórico registra quem fez o quê e quando.'],
       en: ['Board', 'Every job in a column, by stage. Late turns red. One tap moves it to the next stage; the history records who did what and when.'] },
-    { k: 'caixa', url: 'app.ferraia.com/caixa', img: 'forno-nove-caixa', phone: 'forno-nove-m-caixa',
+    { k: 'caixa', url: 'app.ferraia.com/caixa', img: { pt: 'forno-nove-caixa', en: 'harbour-and-hound-caixa' }, phone: { pt: 'forno-nove-m-caixa', en: 'harbour-and-hound-m-caixa' },
       pt: ['Caixa', 'Abrir, sangrar, suprir e fechar o dia. O dono conta a gaveta e diz quanto tem; a tela deriva a diferença e explica de onde veio, por forma de pagamento.'],
       en: ['Cash', 'Open, withdraw, top up and close the day. The owner counts the drawer and says how much is there; the screen derives the difference and explains it, by payment method.'] },
-    { k: 'agenda', url: 'app.ferraia.com/agenda', img: 'baia-de-espuma-agenda', phone: 'baia-de-espuma-m-agenda',
+    { k: 'agenda', url: 'app.ferraia.com/agenda', img: { pt: 'baia-de-espuma-agenda', en: 'harbour-and-hound-agenda' }, phone: { pt: 'baia-de-espuma-m-agenda', en: 'harbour-and-hound-m-agenda' },
       pt: ['Agenda', 'Hora marcada por profissional, com a duração de cada serviço e a lotação do lugar. O cliente marca sozinho pelo link do negócio, e cai aqui.'],
       en: ['Schedule', "Appointments per professional, with each service's duration and the venue's capacity. Customers book themselves through the business link, and it lands here."] },
-    { k: 'mesas', url: 'app.ferraia.com/mesas', img: 'jangada-azul-mesas', phone: 'jangada-azul-m-mesas',
+    { k: 'mesas', url: 'app.ferraia.com/mesas', img: { pt: 'jangada-azul-mesas', en: 'jangada-azul-en-mesas' }, phone: { pt: 'jangada-azul-m-mesas', en: 'jangada-azul-en-m-mesas' },
       pt: ['Mesas', 'Salão, varanda e calçada; a mesa tem conta, o QR da mesa deixa o cliente pedir do lugar, e a cozinha vê o pedido na parede.'],
       en: ['Tables', 'Indoor, terrace and sidewalk; each table has a tab, the table QR lets customers order from their seat, and the kitchen sees it on the wall.'] },
-    { k: 'estoque', url: 'app.ferraia.com/estoque', img: 'forno-nove-estoque', phone: 'forno-nove-m-estoque',
+    { k: 'estoque', url: 'app.ferraia.com/estoque', img: { pt: 'forno-nove-estoque', en: 'harbour-and-hound-estoque' }, phone: { pt: 'forno-nove-m-estoque', en: 'harbour-and-hound-m-estoque' },
       pt: ['Estoque', 'O que está na prateleira, a custo, por unidade, meia caixa ou fardo. Baixo, zerado e vencido em destaque; a compra dá entrada e o preço de custo acompanha.'],
-      en: ["Stock", "What's on the shelf, at cost, by unit, half case or full case. Low, empty and expired highlighted; purchases come in and the cost price follows."] },
-    { k: 'etapas', url: 'app.ferraia.com/etapas', img: 'forno-nove-etapas', phone: 'forno-nove-m-etapas',
+      en: ["Stock", "What's on the shelf, at cost, in the unit the business buys and sells. Low, empty and expired highlighted; purchases come in and the cost price follows."] },
+    { k: 'etapas', url: 'app.ferraia.com/etapas', img: { pt: 'forno-nove-etapas', en: 'harbour-and-hound-etapas' }, phone: { pt: 'forno-nove-m-etapas', en: 'harbour-and-hound-m-etapas' },
       pt: ['Etapas', 'As colunas do quadro são do dono: nome, ícone, cor, quanto tempo costuma levar. O que muda aqui muda o quadro desta empresa, e só dela.'],
       en: ["Stages", "The board's columns belong to the owner: name, icon, color, how long each usually takes. What changes here changes this company's board, and only this one."] },
-    { k: 'historico', url: 'app.ferraia.com/historico-do-dia', img: 'forno-nove-historico-do-dia', phone: 'forno-nove-m-historico-do-dia',
+    { k: 'historico', url: 'app.ferraia.com/historico-do-dia', img: { pt: 'forno-nove-historico-do-dia', en: 'harbour-and-hound-historico-do-dia' }, phone: { pt: 'forno-nove-m-historico-do-dia', en: 'harbour-and-hound-m-historico-do-dia' },
       pt: ['Histórico do dia', 'Quem fez o quê, quando e por quê. O que fugiu do normal vem em cima: desconto fora do padrão, item tirado depois de ir para a cozinha, fechamento corrigido.'],
       en: ['Day history', 'Who did what, when and why. Anything out of the ordinary comes first: an unusual discount, an item removed after reaching the kitchen, a corrected close.'] }
   ];
@@ -467,8 +501,10 @@
     document.getElementById('tab-title').textContent = t[l][0];
     document.getElementById('tab-body').textContent = t[l][1];
     document.getElementById('tab-url').textContent = t.url;
-    var img = document.getElementById('tab-img'); img.src = '/assets/telas/' + t.img + '.webp'; img.alt = t[l][0];
-    var ph = document.getElementById('tab-phone'); ph.src = '/assets/telas/' + t.phone + '.webp'; ph.alt = t[l][0];
+    var img = document.getElementById('tab-img'); img.src = '/assets/telas/' + t.img[l] + '.webp'; img.alt = t[l][0];
+    var ph = document.getElementById('tab-phone'); ph.src = '/assets/telas/' + t.phone[l] + '.webp'; ph.alt = t[l][0];
+    var sw = document.querySelectorAll('img[data-pt]');
+    for (var q = 0; q < sw.length; q++) { var want = sw[q].getAttribute('data-' + l); if (want && sw[q].getAttribute('src') !== want) sw[q].setAttribute('src', want); }
   }
   setLang(lang);
 

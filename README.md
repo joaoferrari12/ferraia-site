@@ -16,9 +16,14 @@ sem uma frase sobre o produto. Quem clicava no link do currículo não via nada.
 - `site/assets/telas/*.webp` — capturas **do ar**, das vitrines (negócios fictícios, ADR-186), tiradas em
   06/11/2026 pelo `ferra-os-web/.tmp/vitrine-ar.mjs` (Chrome com janela, ele faz o login, o script anda e fotografa);
   as portas públicas (`/p/<link>`) pelo `vitrine-porta.mjs`, sem login. Nome: `<empresa>-<tela>.webp`, `-m-` = celular.
+  **A versão em inglês tem telas em inglês** (crítica dele em 06/11): `harbour-and-hound-*` é a demo Harbour & Hound
+  Grooming (en · CAD · Vancouver) e `<empresa>-en-*` / `porta-*-en` são as vitrines com a interface em inglês
+  (`?lang=en`, ADR-159), tiradas pelo `vitrine-ar-en.mjs`. A página troca a imagem junto com o idioma (`data-pt`/`data-en`
+  e `TABS[].img/phone` por idioma). Conversão: `python3 -I telas.py <pasta> en`.
 - `site/assets/` — ícone do app (cavalo no ladrilho vermelho, do handoff da marca de 15/09), favicon igual ao do
   app, `og-image.png` (a mesma do ADR-207), `cavalo.png` do hero do handoff.
 - `wrangler.jsonc` — nome `ferraia-site`, rotas `ferraia.com` e `www.ferraia.com` com `custom_domain: true`.
+- Contato: WhatsApp +1 604 725-1622 (decisão dele, 06/11) na faixa `#contato`, no menu e no rodapé. E-mail: ele decide.
 
 ## Forma
 

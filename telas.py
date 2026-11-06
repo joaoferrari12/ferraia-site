@@ -10,14 +10,24 @@ EMPRESA = {
     'patas-cia-pet-shop': 'patas-e-cia',
     'jangada-azul-bar-e-deposito': 'jangada-azul',
     'barbearia-baia-de-espuma': 'baia-de-espuma',
+    'harbour-hound-grooming': 'harbour-and-hound',
 }
+# `python3 -I telas.py <pasta> en`: fotos tiradas com a interface em ingles (?lang=en); as empresas em portugues
+# ganham o sufixo `-en` (forno-nove-en-inicio); a Harbour & Hound ja e inglesa e fica sem sufixo.
+SUFIXO = ('-' + sys.argv[2]) if len(sys.argv) > 2 else ''
 n = 0
 for f in sorted(os.listdir(SRC)):
     if not f.endswith('.png') or '--' not in f:
         continue
-    emp, tag, tela = f[:-4].split('--')
-    emp = EMPRESA.get(emp, emp)
-    nome = f'{emp}-{tela}' if tag == 'd' else f'{emp}-m-{tela}'
+    partes = f[:-4].split('--')
+    if len(partes) == 2:  # porta-forno-nove--m.png (porta publica, so celular)
+        nome = partes[0] + SUFIXO
+        emp, tag, tela = None, 'm', None
+    else:
+        emp, tag, tela = partes
+        emp = EMPRESA.get(emp, emp)
+        suf = '' if emp == 'harbour-and-hound' else SUFIXO
+        nome = f'{emp}{suf}-{tela}' if tag == 'd' else f'{emp}{suf}-m-{tela}'
     im = Image.open(os.path.join(SRC, f)).convert('RGB')
     if tag == 'd' and im.width > 1600:
         im = im.resize((1600, round(im.height * 1600 / im.width)), Image.LANCZOS)
