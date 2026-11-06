@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Ferra — o seu negócio numa tela só</title>
+  <meta name="description" content="Pedidos, caixa, estoque, agenda e clientes numa tela só, e o Ferra avisa o que precisa da sua atenção. Para pizzarias, pet shops, barbearias, depósitos e salões. Configurado, não programado." />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon-app.svg" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#08080A" />
+  <link rel="canonical" href="https://ferraia.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ferra" />
+  <meta property="og:title" content="Ferra — o seu negócio numa tela só" />
+  <meta property="og:description" content="Pedidos, caixa, estoque, agenda e clientes numa tela só, e o Ferra avisa o que precisa da sua atenção." />
+  <meta property="og:url" content="https://ferraia.com/" />
+  <meta property="og:image" content="https://ferraia.com/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #E11D2E; --black: #08080A; --panel: #0A0A0C; --surface: #101014; --surface-2: #15151A;
+      --graphite: #2A2A2F; --white: #F5F5F5; --text-2: #B4B4BC; --text-3: #9A9AA2; --text-4: #8E8E96; --text-5: #6B6B72;
+      --ok: #66C68C; --warn: #E5A63C; --line: rgba(255,255,255,.09); --line-strong: rgba(255,255,255,.14);
+      --font: Montserrat, system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --max: 1280px; --gutter: 28px; --section-y: clamp(72px, 9vw, 112px);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; background: var(--black); color: var(--white); }
+    body { font-family: var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+    ::selection { background: var(--red); color: #fff; }
+    [lang-block] { display: contents; }
+    html:not([data-lang="en"]) [lang-block="en"], html:not([data-lang="pt"]) [lang-block="pt"] { display: none !important; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+    .label { font-family: var(--mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--red); }
+    .label.dim { color: var(--text-5); }
+    .rule { width: 56px; height: 3px; background: var(--red); margin: 28px 0; }
+    h1, h2, h3 { margin: 0; text-wrap: balance; }
+    h2 { font-size: clamp(30px, 3.8vw, 54px); line-height: 1.04; font-weight: 900; letter-spacing: -.025em; margin-top: 22px; }
+    .lead { font-size: clamp(16px, 1.3vw, 19px); line-height: 1.65; color: var(--text-2); max-width: 620px; margin: 22px 0 0; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; padding: 18px 28px; border: 1px solid transparent; transition: background .15s, color .15s, border-color .15s; white-space: nowrap; }
+    .btn.red { background: var(--red); color: #fff; }
+    .btn.red:hover { background: var(--white); color: #0A0A0A; }
+    .btn.ghost { border-color: rgba(255,255,255,.26); color: var(--white); }
+    .btn.ghost:hover { border-color: var(--white); background: rgba(255,255,255,.06); }
+    section { border-bottom: 1px solid var(--line); }
+    section.alt { background: var(--panel); }
+    .pad { padding-top: var(--section-y); padding-bottom: var(--section-y); }
+
+    /* nav */
+    .nav { position: sticky; top: 0; z-index: 60; background: rgba(8,8,10,.84); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav .wrap { min-height: 72px; display: flex; align-items: center; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { height: 34px; width: 34px; }
+    .brand b { font-size: 20px; font-weight: 900; letter-spacing: -.02em; }
+    .nav nav { margin-left: auto; display: flex; align-items: center; gap: 22px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+    .nav nav a:hover { color: var(--white); }
+    .nav nav .hide-m { display: none; }
+    @media (min-width: 880px) { .nav nav .hide-m { display: inline; } }
+    .lang { display: inline-flex; border: 1px solid var(--line-strong); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; }
+    .lang button { background: none; border: 0; color: var(--text-3); padding: 8px 10px; cursor: pointer; font: inherit; letter-spacing: inherit; }
+    .lang button[aria-pressed="true"] { background: var(--white); color: #0A0A0A; }
+    .nav .btn { padding: 12px 18px; font-size: 11px; }
+
+    /* hero */
+    .hero { position: relative; overflow: hidden; }
+    .hero .glow { position: absolute; inset: 0; background: radial-gradient(110% 80% at 80% 30%, rgba(225,29,46,.22) 0%, rgba(225,29,46,0) 60%); pointer-events: none; }
+    .hero .wrap { position: relative; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; padding-top: 72px; padding-bottom: 64px; }
+    @media (min-width: 980px) { .hero .wrap { grid-template-columns: minmax(0, 560px) minmax(0, 1fr); min-height: 640px; padding-top: 48px; } }
+    .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+    .eyebrow i { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid var(--red); }
+    h1 { font-size: clamp(40px, 5.6vw, 76px); line-height: .96; font-weight: 900; letter-spacing: -.03em; text-transform: uppercase; }
+    h1 em { font-style: normal; color: var(--red); }
+    .hero .lead { max-width: 520px; margin-top: 28px; }
+    .ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+    .hero-mini { display: flex; gap: 28px; margin-top: 52px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-5); }
+    .shot { position: relative; border: 1px solid var(--line-strong); background: var(--surface); box-shadow: 0 60px 120px -40px rgba(0,0,0,.95); }
+    .shot .bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: #0C0C10; }
+    .shot .bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--graphite); display: inline-block; margin-right: 5px; }
+    .shot .bar span { font-family: var(--mono); font-size: 10px; color: var(--text-5); background: var(--surface-2); border: 1px solid rgba(255,255,255,.07); padding: 4px 10px; }
+    .shot img { width: 100%; }
+    .hero .shot { transform: perspective(1400px) rotateY(-4deg); }
+    @media (max-width: 979px) { .hero .shot { transform: none; } }
+
+    /* thesis: same screen, other business */
+    .trio { display: grid; gap: 18px; margin-top: 56px; grid-template-columns: 1fr; }
+    @media (min-width: 820px) { .trio { grid-template-columns: repeat(3, 1fr); } }
+    .trio figure { margin: 0; border: 1px solid var(--line); background: var(--surface); }
+    .trio figure img { width: 100%; aspect-ratio: 1366 / 768; object-fit: cover; object-position: top; }
+    .trio figcaption { padding: 14px 16px 16px; border-top: 1px solid var(--line); }
+    .trio figcaption b { display: block; font-size: 15px; font-weight: 700; }
+    .trio figcaption span { display: block; margin-top: 4px; font-size: 13px; color: var(--text-4); line-height: 1.5; }
+    .kicker { margin: 48px 0 0; font-size: clamp(18px, 1.8vw, 24px); font-weight: 600; max-width: 820px; line-height: 1.45; }
+
+    /* tour */
+    .tabs { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 36px; }
+    .tabs button { font: inherit; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-4); background: var(--surface); border: 1px solid var(--line); padding: 12px 16px; cursor: pointer; }
+    .tabs button[aria-selected="true"] { color: var(--white); border-color: var(--red); background: var(--surface-2); }
+    .tabs button:hover { color: var(--white); }
+    .tour { display: grid; gap: 28px; margin-top: 28px; grid-template-columns: 1fr; align-items: start; }
+    @media (min-width: 980px) { .tour { grid-template-columns: minmax(0, 1fr) 300px; } }
+    .tour .shot img { aspect-ratio: 1366 / 768; object-fit: cover; object-position: top; }
+    .tour .desc { padding: 6px 0; }
+    .tour .desc h3 { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+    .tour .desc p { margin: 12px 0 0; font-size: 15px; line-height: 1.65; color: var(--text-2); }
+    .phone { width: 220px; border: 8px solid #15151A; border-radius: 34px; overflow: hidden; background: #000; box-shadow: 0 40px 80px -30px rgba(0,0,0,.9); margin: 28px auto 0; }
+    .phone img { width: 100%; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; }
+    @media (min-width: 980px) { .phone { margin: 28px 0 0; } }
+
+    /* try */
+    .cards { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 48px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+    .card { background: var(--black); padding: 26px 22px 28px; min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; transition: background .15s; }
+    .card:hover { background: var(--surface); }
+    .card .label { color: var(--red); }
+    .card h3 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; margin-top: 12px; }
+    .card p { margin: 8px 0 0; font-size: 14px; color: var(--text-4); line-height: 1.55; }
+    .card .go { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--white); display: inline-flex; align-items: center; gap: 8px; }
+    .card .go::after { content: "→"; color: var(--red); }
+    .card.cta { background: var(--red); color: #fff; }
+    .card.cta .label, .card.cta p, .card.cta .go::after { color: #fff; }
+    .card.cta:hover { background: #c9152a; }
+    .portas { display: grid; gap: 22px; margin-top: 48px; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .portas { grid-template-columns: 1fr 1fr; } }
+    .porta { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: center; border: 1px solid var(--line); background: var(--surface); padding: 20px; min-width: 0; }
+    @media (min-width: 480px) { .porta { grid-template-columns: 150px minmax(0, 1fr); } }
+    .porta > div { min-width: 0; }
+    .porta .go, .card .go { overflow-wrap: anywhere; }
+    .porta .phone { width: 150px; margin: 0; border-width: 6px; border-radius: 24px; }
+    @media (max-width: 479px) { .porta .phone { width: 150px; margin: 0 auto; } }
+    .porta h3 { font-size: 19px; font-weight: 700; }
+    .porta p { margin: 8px 0 14px; font-size: 14px; color: var(--text-2); line-height: 1.55; }
+    .note { margin: 28px 0 0; font-size: 13px; color: var(--text-5); line-height: 1.6; max-width: 760px; }
+
+    /* how it's built */
+    .nums { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 48px; grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 900px) { .nums { grid-template-columns: repeat(4, 1fr); } }
+    .num { background: var(--panel); padding: 28px 22px 26px; }
+    .num b { display: block; font-size: clamp(34px, 4vw, 52px); font-weight: 900; letter-spacing: -.03em; line-height: 1; }
+    .num span { display: block; margin-top: 10px; font-size: 13px; color: var(--text-3); line-height: 1.5; }
+    .cols { display: grid; gap: 40px; margin-top: 56px; grid-template-columns: 1fr; }
+    @media (min-width: 900px) { .cols { grid-template-columns: 1fr 1fr; gap: 64px; } }
+    .cols h3 { font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+    .cols p { margin: 12px 0 0; font-size: 15px; line-height: 1.68; color: var(--text-2); }
+    .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .stack span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--text-2); border: 1px solid var(--line-strong); padding: 7px 10px; }
+    .links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
+
+    /* who */
+    .who { display: grid; gap: 36px; grid-template-columns: 1fr; align-items: center; }
+    @media (min-width: 900px) { .who { grid-template-columns: minmax(0, 1fr) 380px; } }
+    .who .horse { position: relative; min-height: 260px; }
+    .who .horse img { width: 100%; max-width: 380px; margin: 0 auto; -webkit-mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 78%); mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 78%); }
+    .who .horse::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 50%, rgba(225,29,46,.18), rgba(225,29,46,0) 70%); pointer-events: none; }
+
+    footer { padding: 40px 0 48px; color: var(--text-5); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between; }
+    footer a:hover { color: var(--white); }
+
+    [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+    [data-reveal].in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Ferra">
+      <img src="/assets/icone.svg" alt="" width="34" height="34" />
+      <b>Ferra</b>
+    </a>
+    <nav>
+      <a class="hide-m" href="#tela"><span lang-block="pt">O produto</span><span lang-block="en">Product</span></a>
+      <a class="hide-m" href="#experimente"><span lang-block="pt">Experimente</span><span lang-block="en">Try it</span></a>
+      <a class="hide-m" href="#feito"><span lang-block="pt">Como é feito</span><span lang-block="en">How it's built</span></a>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" data-set-lang="pt" aria-pressed="true">PT</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn ghost" href="https://app.ferraia.com/"><span lang-block="pt">Entrar</span><span lang-block="en">Sign in</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow"><i></i><span class="label"><span lang-block="pt">Operação de negócio pequeno</span><span lang-block="en">Operations for small businesses</span></span></div>
+      <h1>
+        <span lang-block="pt">O seu negócio<br />numa tela <em>só.</em></span>
+        <span lang-block="en">Your business<br />on <em>one</em> screen.</span>
+      </h1>
+      <p class="lead">
+        <span lang-block="pt">Pedidos, caixa, estoque, agenda e clientes, e o Ferra avisa o que precisa da sua atenção. Pizzaria, pet shop, barbearia, depósito, salão: o mesmo produto, configurado para o seu jeito de trabalhar, não programado por encomenda.</span>
+        <span lang-block="en">Orders, cash, stock, bookings and customers in one place, and Ferra tells you what needs your attention. Pizzeria, pet shop, barbershop, beverage depot, salon: one product, configured to how you work, not custom-coded.</span>
+      </p>
+      <div class="ctas">
+        <a class="btn red" href="https://app.ferraia.com/p/forno-nove"><span lang-block="pt">Ver uma loja de exemplo</span><span lang-block="en">Open a sample store</span></a>
+        <a class="btn ghost" href="#tela"><span lang-block="pt">Como funciona</span><span lang-block="en">How it works</span></a>
+      </div>
+      <div class="hero-mini">
+        <span><span lang-block="pt">No ar desde setembro de 2026</span><span lang-block="en">Live since September 2026</span></span>
+        <span><span lang-block="pt">Celular, tablet e balcão</span><span lang-block="en">Phone, tablet and counter</span></span>
+        <span>PT · EN · ES</span>
+      </div>
+    </div>
+    <div class="shot" data-reveal>
+      <div class="bar"><i></i><i></i><i></i><span>app.ferraia.com</span></div>
+      <img src="/assets/telas/forno-nove-inicio.webp" alt="Tela Início do Ferra na Pizzaria Forno Nove: vendido hoje, recebido, em aberto e o que o negócio avisa" width="1366" height="768" loading="eager" />
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="tese">
+  <div class="wrap pad">
+    <span class="label"><span lang-block="pt">A ideia</span><span lang-block="en">The idea</span></span>
+    <h2>
+      <span lang-block="pt">A mesma tela. Outro negócio.</span>
+      <span lang-block="en">Same screen. Different business.</span>
+    </h2>
+    <p class="lead">
+      <span lang-block="pt">As etapas do quadro, o que se anota sobre cada atendimento, os cargos, as formas de pagamento e as mesas são dados que o dono define. Nenhuma linha de código muda entre uma pizzaria e um pet shop.</span>
+      <span lang-block="en">Board stages, what gets recorded per job, roles, payment methods and tables are data the owner defines. Not a single line of code changes between a pizzeria and a pet shop.</span>
+    </p>
+    <div class="trio">
+      <figure data-reveal>
+        <img src="/assets/telas/forno-nove-inicio.webp" alt="Início da Pizzaria Forno Nove" loading="lazy" />
+        <figcaption><b>Pizzaria Forno Nove</b><span lang-block="pt">Vendido e recebido hoje, e o aviso: a Coca-Cola 2 L acaba segunda, no ritmo das últimas quatro semanas.</span><span lang-block="en">Sold and received today, and the warning: Coke 2 L runs out on Monday at the pace of the last four weeks.</span></figcaption>
+      </figure>
+      <figure data-reveal>
+        <img src="/assets/telas/patas-e-cia-inicio.webp" alt="Início do Patas &amp; Cia Pet Shop" loading="lazy" />
+        <figcaption><b>Patas &amp; Cia Pet Shop</b><span lang-block="pt">A mesma tela, com o que um pet shop precisa: o antipulgas que vai acabar e as vacinas atrasadas, com o botão de avisar o tutor.</span><span lang-block="en">The same screen, with what a pet shop needs: the flea treatment running out and the overdue vaccines, with a button to message the owner.</span></figcaption>
+      </figure>
+      <figure data-reveal>
+        <img src="/assets/telas/baia-de-espuma-inicio.webp" alt="Início da Barbearia Baía de Espuma" loading="lazy" />
+        <figcaption><b>Barbearia Baía de Espuma</b><span lang-block="pt">A mesma tela numa barbearia: o dia por barbeiro, hora marcada e fila, e o cliente marcando sozinho pelo link.</span><span lang-block="en">The same screen in a barbershop: the day per barber, appointments and queue, and customers booking themselves through the link.</span></figcaption>
+      </figure>
+    </div>
+    <p class="kicker">
+      <span lang-block="pt">Quem opera não precisa entender o sistema. O sistema é que precisa entender o negócio.</span>
+      <span lang-block="en">The people running the place don't have to understand the system. The system has to understand the business.</span>
+    </p>
+  </div>
+</section>
+
+<section id="tela">
+  <div class="wrap pad">
+    <span class="label"><span lang-block="pt">O produto</span><span lang-block="en">The product</span></span>
+    <h2>
+      <span lang-block="pt">O dia inteiro, do balcão ao fechamento.</span>
+      <span lang-block="en">The whole day, from the counter to the close.</span>
+    </h2>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="tour">
+      <div class="shot">
+        <div class="bar"><i></i><i></i><i></i><span id="tab-url">app.ferraia.com/</span></div>
+        <img id="tab-img" src="/assets/telas/forno-nove-inicio.webp" alt="" width="1366" height="768" loading="lazy" />
+      </div>
+      <div class="desc">
+        <h3 id="tab-title"></h3>
+        <p id="tab-body"></p>
+        <div class="phone"><img id="tab-phone" src="/assets/telas/forno-nove-m-quadro.webp" alt="" loading="lazy" /></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="experimente">
+  <div class="wrap pad">
+    <span class="label"><span lang-block="pt">Experimente agora</span><span lang-block="en">Try it now</span></span>
+    <h2>
+      <span lang-block="pt">Sete negócios de exemplo, abertos no ar.</span>
+      <span lang-block="en">Seven sample businesses, live right now.</span>
+    </h2>
+    <p class="lead">
+      <span lang-block="pt">Cada negócio no Ferra ganha um link. O cliente abre no celular, vê o cardápio ou os serviços, pede, marca a hora ou entra na fila, e acompanha sem criar conta. Estes sete são fictícios e ficam vivos todos os dias, com movimento sorteado no horário de Salvador.</span>
+      <span lang-block="en">Every business on Ferra gets a public link. Customers open it on their phone, see the menu or services, order, book a time or join the queue, and track it without an account. These seven are fictional and kept alive every day, with activity generated on Salvador time.</span>
+    </p>
+    <div class="portas">
+      <a class="porta" href="https://app.ferraia.com/p/forno-nove" data-reveal>
+        <div class="phone"><img src="/assets/telas/porta-forno-nove.webp" alt="" loading="lazy" /></div>
+        <div>
+          <span class="label"><span lang-block="pt">Pizzaria</span><span lang-block="en">Pizzeria</span></span>
+          <h3>Forno Nove</h3>
+          <p><span lang-block="pt">Cardápio com foto, tamanho e meio a meio, entrega com taxa do bairro, Pix com o valor exato.</span><span lang-block="en">Menu with photos, sizes and half-and-half, delivery fee by district, Pix with the exact amount.</span></p>
+          <span class="go">app.ferraia.com/p/forno-nove</span>
+        </div>
+      </a>
+      <a class="porta" href="https://app.ferraia.com/p/baia-de-espuma" data-reveal>
+        <div class="phone"><img src="/assets/telas/porta-baia-de-espuma.webp" alt="" loading="lazy" /></div>
+        <div>
+          <span class="label"><span lang-block="pt">Barbearia</span><span lang-block="en">Barbershop</span></span>
+          <h3>Baía de Espuma</h3>
+          <p><span lang-block="pt">Serviços com duração, horário livre por barbeiro, ou entrar na fila agora e ver a posição.</span><span lang-block="en">Services with duration, open slots per barber, or join the queue now and see your position.</span></p>
+          <span class="go">app.ferraia.com/p/baia-de-espuma</span>
+        </div>
+      </a>
+    </div>
+    <div class="cards">
+      <a class="card" href="https://app.ferraia.com/p/patas-e-cia" data-reveal>
+        <div><span class="label">Pet shop</span><h3>Patas &amp; Cia</h3><p><span lang-block="pt">Banho e tosa com hora marcada, clínica, ração e farmácia; planos mensais e fiado.</span><span lang-block="en">Bath and grooming by appointment, clinic, food and pharmacy; monthly plans and tabs.</span></p></div>
+        <span class="go">/p/patas-e-cia</span>
+      </a>
+      <a class="card" href="https://app.ferraia.com/p/jangada-azul" data-reveal>
+        <div><span class="label"><span lang-block="pt">Bar e depósito</span><span lang-block="en">Bar and depot</span></span><h3>Jangada Azul</h3><p><span lang-block="pt">Mesas com QR, petiscos, chopp, e o depósito vendendo fardo e gelo para levar.</span><span lang-block="en">QR-coded tables, snacks, draft beer, and the depot selling cases and ice to go.</span></p></div>
+        <span class="go">/p/jangada-azul</span>
+      </a>
+      <a class="card" href="https://app.ferraia.com/p/deposito-12" data-reveal>
+        <div><span class="label"><span lang-block="pt">Depósito de bebidas</span><span lang-block="en">Beverage depot</span></span><h3>Depósito 12</h3><p><span lang-block="pt">Lata, long neck e retornável com casco; conta fiado do freguês e entrega no bairro.</span><span lang-block="en">Cans, long necks and returnables with deposit; customer tabs and neighborhood delivery.</span></p></div>
+        <span class="go">/p/deposito-12</span>
+      </a>
+      <a class="card" href="https://app.ferraia.com/p/jasmim-da-ladeira" data-reveal>
+        <div><span class="label"><span lang-block="pt">Salão</span><span lang-block="en">Salon</span></span><h3>Jasmim da Ladeira</h3><p><span lang-block="pt">Cabelo, química, unhas e estética, com a profissional que a cliente escolher.</span><span lang-block="en">Hair, chemical treatments, nails and beauty, with the professional the client picks.</span></p></div>
+        <span class="go">/p/jasmim-da-ladeira</span>
+      </a>
+      <a class="card" href="https://app.ferraia.com/p/sabao-de-coco" data-reveal>
+        <div><span class="label"><span lang-block="pt">Lava-jato</span><span lang-block="en">Car wash</span></span><h3>Sabão de Coco</h3><p><span lang-block="pt">Lavagem, acabamento e estética; o cliente entra na fila do celular e acompanha o carro.</span><span lang-block="en">Wash, finish and detailing; the customer joins the queue from their phone and tracks the car.</span></p></div>
+        <span class="go">/p/sabao-de-coco</span>
+      </a>
+      <a class="card cta" href="https://app.ferraia.com/" data-reveal>
+        <div><span class="label"><span lang-block="pt">Já tem conta?</span><span lang-block="en">Have an account?</span></span><h3><span lang-block="pt">Entrar no Ferra</span><span lang-block="en">Sign in to Ferra</span></h3><p><span lang-block="pt">O lado de dentro: quadro, caixa, estoque, equipe.</span><span lang-block="en">The inside: board, cash, stock, team.</span></p></div>
+        <span class="go">app.ferraia.com</span>
+      </a>
+    </div>
+    <p class="note">
+      <span lang-block="pt">Pessoas, telefones e endereços dos sete negócios são inventados. Fora do horário de cada um, a página diz quando abre. Hoje o Ferra entra por convite: os primeiros negócios de verdade começam em Salvador em dezembro de 2026.</span>
+      <span lang-block="en">People, phone numbers and addresses of the seven businesses are made up. Outside each one's opening hours the page says when it opens. Ferra is invite-only today: the first real businesses go live in Salvador, Brazil, in December 2026.</span>
+    </p>
+  </div>
+</section>
+
+<section id="feito">
+  <div class="wrap pad">
+    <span class="label"><span lang-block="pt">Como é feito</span><span lang-block="en">How it's built</span></span>
+    <h2>
+      <span lang-block="pt">Uma pessoa, agentes de IA, e tudo escrito.</span>
+      <span lang-block="en">One person, AI agents, and everything written down.</span>
+    </h2>
+    <p class="lead">
+      <span lang-block="pt">O Ferra é construído por um engenheiro, com o Claude Code como método de engenharia e não como autocompletar: cada decisão vira um registro, guardas automáticas recusam publicar quando uma regra quebra, e baterias de teste andam o dia inteiro de negócios fictícios anotando o que está certo e o que está errado.</span>
+      <span lang-block="en">Ferra is built by one engineer, using Claude Code as an engineering method rather than autocomplete: every decision becomes a written record, scripted guards refuse to deploy when a rule breaks, and test batteries walk a full day of fictional businesses, logging what's right and what's wrong.</span>
+    </p>
+    <div class="nums">
+      <div class="num" data-reveal><b>208</b><span lang-block="pt">decisões de arquitetura escritas (ADRs), de julho a outubro de 2026</span><span lang-block="en">architecture decision records written, July to October 2026</span></div>
+      <div class="num" data-reveal><b>133</b><span lang-block="pt">migrações de banco versionadas, cada empresa isolada por row level security</span><span lang-block="en">versioned database migrations, every company isolated by row level security</span></div>
+      <div class="num" data-reveal><b>298</b><span lang-block="pt">arquivos de teste: unitários, de banco e provas de tela no celular e no desktop</span><span lang-block="en">test files: unit, database, and screen proofs on phone and desktop</span></div>
+      <div class="num" data-reveal><b>1.475</b><span lang-block="pt">commits em três repositórios; publicação que nunca derruba o que está no ar</span><span lang-block="en">commits across three repositories; deploys that never take the live app down</span></div>
+    </div>
+    <div class="cols">
+      <div data-reveal>
+        <h3><span lang-block="pt">O que roda</span><span lang-block="en">What runs it</span></h3>
+        <p><span lang-block="pt">Aplicativo instalável (PWA) que abre sem rede e carrega cada tela sob demanda, pensado para o celular barato na internet do balcão. Banco Postgres com isolamento por empresa no próprio banco, não na tela. Funções de borda para o que o navegador não pode fazer. Publicado na borda da Cloudflare.</span><span lang-block="en">An installable PWA that opens offline and loads each screen on demand, designed for a cheap phone on the shop's Wi-Fi. Postgres with per-company isolation enforced in the database, not in the UI. Edge functions for what the browser can't do. Served from Cloudflare's edge.</span></p>
+        <div class="stack"><span>React 19</span><span>TypeScript</span><span>Vite</span><span>TanStack Query</span><span>shadcn/ui</span><span>PWA</span><span>Supabase</span><span>Postgres + RLS</span><span>Edge Functions</span><span>Cloudflare Workers</span><span>Playwright</span><span>GitHub Actions</span><span>Claude Code</span></div>
+      </div>
+      <div data-reveal>
+        <h3><span lang-block="pt">O método, aberto</span><span lang-block="en">The method, in the open</span></h3>
+        <p><span lang-block="pt">O jeito de construir o Ferra está publicado como um pacote de skills do Claude Code: guardas que recusam, baterias que registram certo e errado, vereditos medidos no git. Sem nenhuma linha do código do produto.</span><span lang-block="en">The way Ferra is built is published as an installable Claude Code skills pack: guards that refuse, batteries that log right and wrong, verdicts measured in git. None of the product's code is in it.</span></p>
+        <div class="links">
+          <a class="btn ghost" href="https://github.com/joaoferrari12/metodo-agentic">metodo-agentic</a>
+          <a class="btn ghost" href="https://github.com/joaoferrari12">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="quem">
+  <div class="wrap pad who">
+    <div>
+      <span class="label"><span lang-block="pt">Quem faz</span><span lang-block="en">Who's behind it</span></span>
+      <h2>
+        <span lang-block="pt">Feito em Vancouver, para Salvador.</span>
+        <span lang-block="en">Built in Vancouver, for Salvador.</span>
+      </h2>
+      <p class="lead">
+        <span lang-block="pt">João Victor Ferrari Fonseca, engenheiro fundador. A família dele tem um pet shop em Salvador; ele estuda Sistemas de Computação no BCIT, em Vancouver, e constrói o Ferra desde julho de 2026 para os negócios pequenos que ainda operam no papel e no WhatsApp.</span>
+        <span lang-block="en">João Victor Ferrari Fonseca, founding engineer. His family runs a pet shop in Salvador, Brazil; he studies Computer Systems at BCIT in Vancouver, and has been building Ferra since July 2026 for the small businesses that still run on paper and WhatsApp.</span>
+      </p>
+      <div class="links">
+        <a class="btn red" href="https://www.linkedin.com/in/joaoferrari12">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/joaoferrari12">GitHub</a>
+      </div>
+    </div>
+    <div class="horse" data-reveal><img src="/assets/cavalo.png" alt="" loading="lazy" /></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ferra IA · ferraia.com</span>
+    <span><a href="https://app.ferraia.com/">app.ferraia.com</a> · <a href="https://app.ferraia.com/p/forno-nove"><span lang-block="pt">loja de exemplo</span><span lang-block="en">sample store</span></a> · <a href="https://github.com/joaoferrari12/metodo-agentic">metodo-agentic</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var html = document.documentElement;
+  function pick() {
+    try { var s = localStorage.getItem('ferra-site.lang'); if (s === 'pt' || s === 'en') return s; } catch (e) {}
+    var l = (navigator.language || 'en').toLowerCase();
+    return l.indexOf('pt') === 0 ? 'pt' : 'en';
+  }
+  function setLang(l) {
+    html.setAttribute('data-lang', l);
+    html.setAttribute('lang', l === 'pt' ? 'pt-BR' : 'en');
+    document.title = l === 'pt' ? 'Ferra — o seu negócio numa tela só' : 'Ferra — your whole business on one screen';
+    var btns = document.querySelectorAll('[data-set-lang]');
+    for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', String(btns[i].getAttribute('data-set-lang') === l));
+    try { localStorage.setItem('ferra-site.lang', l); } catch (e) {}
+    renderTab(current);
+  }
+  var lang = pick();
+  var btns = document.querySelectorAll('[data-set-lang]');
+  for (var i = 0; i < btns.length; i++) btns[i].addEventListener('click', function () { setLang(this.getAttribute('data-set-lang')); });
+
+  // Tour tabs. Captures are from the live showcase businesses (fictional data), November 2026.
+  var TABS = [
+    { k: 'inicio', url: 'app.ferraia.com/', img: 'forno-nove-inicio', phone: 'forno-nove-m-inicio',
+      pt: ['Início', 'O que vendeu hoje, o que entrou, o que está em aberto, quem está devendo. E o negócio avisa: a ração que vai acabar no ritmo das últimas semanas, a cliente que vinha sempre e sumiu.'],
+      en: ['Home', "Today's sales, what came in, what's still open, who owes. And the business warns you: the stock item that will run out at the recent pace, the regular customer who stopped coming."] },
+    { k: 'quadro', url: 'app.ferraia.com/quadro', img: 'forno-nove-quadro', phone: 'forno-nove-m-quadro',
+      pt: ['Quadro', 'Cada atendimento numa coluna, por etapa. Atrasou, fica vermelho. Tocar no botão leva para a etapa seguinte; o histórico registra quem fez o quê e quando.'],
+      en: ['Board', 'Every job in a column, by stage. Late turns red. One tap moves it to the next stage; the history records who did what and when.'] },
+    { k: 'caixa', url: 'app.ferraia.com/caixa', img: 'forno-nove-caixa', phone: 'forno-nove-m-caixa',
+      pt: ['Caixa', 'Abrir, sangrar, suprir e fechar o dia. O dono conta a gaveta e diz quanto tem; a tela deriva a diferença e explica de onde veio, por forma de pagamento.'],
+      en: ['Cash', 'Open, withdraw, top up and close the day. The owner counts the drawer and says how much is there; the screen derives the difference and explains it, by payment method.'] },
+    { k: 'agenda', url: 'app.ferraia.com/agenda', img: 'baia-de-espuma-agenda', phone: 'baia-de-espuma-m-agenda',
+      pt: ['Agenda', 'Hora marcada por profissional, com a duração de cada serviço e a lotação do lugar. O cliente marca sozinho pelo link do negócio, e cai aqui.'],
+      en: ['Schedule', "Appointments per professional, with each service's duration and the venue's capacity. Customers book themselves through the business link, and it lands here."] },
+    { k: 'mesas', url: 'app.ferraia.com/mesas', img: 'jangada-azul-mesas', phone: 'jangada-azul-m-mesas',
+      pt: ['Mesas', 'Salão, varanda e calçada; a mesa tem conta, o QR da mesa deixa o cliente pedir do lugar, e a cozinha vê o pedido na parede.'],
+      en: ['Tables', 'Indoor, terrace and sidewalk; each table has a tab, the table QR lets customers order from their seat, and the kitchen sees it on the wall.'] },
+    { k: 'estoque', url: 'app.ferraia.com/estoque', img: 'forno-nove-estoque', phone: 'forno-nove-m-estoque',
+      pt: ['Estoque', 'O que está na prateleira, a custo, por unidade, meia caixa ou fardo. Baixo, zerado e vencido em destaque; a compra dá entrada e o preço de custo acompanha.'],
+      en: ["Stock", "What's on the shelf, at cost, by unit, half case or full case. Low, empty and expired highlighted; purchases come in and the cost price follows."] },
+    { k: 'etapas', url: 'app.ferraia.com/etapas', img: 'forno-nove-etapas', phone: 'forno-nove-m-etapas',
+      pt: ['Etapas', 'As colunas do quadro são do dono: nome, ícone, cor, quanto tempo costuma levar. O que muda aqui muda o quadro desta empresa, e só dela.'],
+      en: ["Stages", "The board's columns belong to the owner: name, icon, color, how long each usually takes. What changes here changes this company's board, and only this one."] },
+    { k: 'historico', url: 'app.ferraia.com/historico-do-dia', img: 'forno-nove-historico-do-dia', phone: 'forno-nove-m-historico-do-dia',
+      pt: ['Histórico do dia', 'Quem fez o quê, quando e por quê. O que fugiu do normal vem em cima: desconto fora do padrão, item tirado depois de ir para a cozinha, fechamento corrigido.'],
+      en: ['Day history', 'Who did what, when and why. Anything out of the ordinary comes first: an unusual discount, an item removed after reaching the kitchen, a corrected close.'] }
+  ];
+  var current = 0;
+  var tabsEl = document.getElementById('tabs');
+  TABS.forEach(function (t, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.i = i;
+    b.addEventListener('click', function () { current = i; renderTab(i); });
+    tabsEl.appendChild(b);
+  });
+  function renderTab(i) {
+    var l = html.getAttribute('data-lang') || 'pt';
+    var t = TABS[i];
+    var bs = tabsEl.children;
+    for (var j = 0; j < bs.length; j++) { bs[j].textContent = TABS[j][l][0]; bs[j].setAttribute('aria-selected', String(j === i)); }
+    document.getElementById('tab-title').textContent = t[l][0];
+    document.getElementById('tab-body').textContent = t[l][1];
+    document.getElementById('tab-url').textContent = t.url;
+    var img = document.getElementById('tab-img'); img.src = '/assets/telas/' + t.img + '.webp'; img.alt = t[l][0];
+    var ph = document.getElementById('tab-phone'); ph.src = '/assets/telas/' + t.phone + '.webp'; ph.alt = t[l][0];
+  }
+  setLang(lang);
+
+  // Reveal on scroll; elements already in view are never hidden.
+  var els = document.querySelectorAll('[data-reveal]');
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    for (var k = 0; k < els.length; k++) els[k].classList.add('in');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    for (var m = 0; m < els.length; m++) {
+      var r = els[m].getBoundingClientRect();
+      if (r.top < window.innerHeight * .95) els[m].classList.add('in'); else io.observe(els[m]);
+    }
+  }
+})();
+</script>
+</body>
+</html>

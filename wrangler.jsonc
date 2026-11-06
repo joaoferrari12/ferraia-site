@@ -1,0 +1,19 @@
+// ferraia.com — a vitrine pública do Ferra. Site estático, Worker com static assets, no MESMO molde do
+// `ferra-os-web/wrangler.jsonc` (Workers, não Pages; `custom_domain: true` cria o DNS sozinho na zona ferraia.com).
+//
+// É um Worker SEPARADO do `ferra-os-web` de propósito: publicar aqui nunca toca o que está no ar em
+// app.ferraia.com. Publica-se de dentro do `ferra-os-web` (que tem o wrangler instalado):
+//   npx wrangler deploy --config ..\ferraia-site\wrangler.jsonc
+{
+  "name": "ferraia-site",
+  "compatibility_date": "2026-11-06",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "routes": [
+    { "pattern": "ferraia.com", "custom_domain": true },
+    { "pattern": "www.ferraia.com", "custom_domain": true }
+  ]
+}
