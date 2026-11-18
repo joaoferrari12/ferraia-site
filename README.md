@@ -23,7 +23,7 @@ sem uma frase sobre o produto. Quem clicava no link do currículo não via nada.
 - `site/assets/` — ícone do app (cavalo no ladrilho vermelho, do handoff da marca de 15/09), favicon igual ao do
   app, `og-image.png` (a mesma do ADR-207), `cavalo.png` do hero do handoff.
 - `wrangler.jsonc` — nome `ferraia-site`, rotas `ferraia.com` e `www.ferraia.com` com `custom_domain: true`.
-- Contato: WhatsApp +1 604 725-1622 (decisão dele, 06/11) na faixa `#contato`, no menu e no rodapé. E-mail: ele decide.
+- Contato: WhatsApp +1 604 725-1622 (decisão dele, 06/11) na faixa `#contato`, no menu e no rodapé. E-mail `contato@ferraia.com` (decisão dele, 17/11) na faixa e no rodapé: Email Routing da Cloudflare encaminha para o Gmail dele (regra `contato`, criada pelo `wrangler email routing`; nada de caixa nova nem senha).
 
 ## Forma
 
