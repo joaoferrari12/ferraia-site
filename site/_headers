@@ -1,0 +1,9 @@
+# Cabecalhos de seguranca da ferraia.com (17/11/2026), os mesmos do app.ferraia.com (ADR-154) menos a CSP:
+# a pagina tem CSS e JS embutidos no index.html, e uma CSP aqui sem medir quebraria o idioma e o tour.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
