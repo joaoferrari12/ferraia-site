@@ -43,12 +43,12 @@ npx wrangler deploy --config ..\ferraia-site\wrangler.jsonc
 
 Conferir com os olhos depois: `https://ferraia.com` em pt e en, a 390 e a 1366.
 
-## Números que a página afirma (medidos em 06/11/2026; atualizar quando mudarem)
+## Números que a página afirma (medidos em 06/11/2026, remedidos em 17/11/2026; atualizar quando mudarem)
 
 | número | de onde |
 |---|---|
-| 208 ADRs | `ls FERRA-IA/docs/adr/ADR-*.md` |
+| 209 ADRs | `ls FERRA-IA/docs/adr/ADR-*.md` |
 | 133 migrações | `ls ferra-os/supabase/migrations/*.sql` |
-| 298 arquivos de teste | 179 `*.test.ts(x)` em `ferra-os-web/src` + 119 `tela/*.spec.ts` |
-| 1.475 commits | `git log --oneline \| wc -l` em ferra-os-web (500) + ferra-os (262) + FERRA-IA (713) |
+| 299 arquivos de teste | 179 `*.test.ts(x)` em `ferra-os-web/src` + 120 `tela/*.spec.ts` |
+| 1.482 commits | `git log --oneline \| wc -l` em ferra-os-web (503) + ferra-os (262) + FERRA-IA (717) |
 | 7 vitrines vivas | `ferra-os/supabase/demo/README.md`, `app.showcase_tick` (ADR-185/186) |
