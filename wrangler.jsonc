@@ -1,4 +1,4 @@
-// ferraia.com — a vitrine pública do Ferra. Site estático, Worker com static assets, no MESMO molde do
+// ferraia.com — a vitrine pública da Sócia. Site estático, Worker com static assets, no MESMO molde do
 // `ferra-os-web/wrangler.jsonc` (Workers, não Pages; `custom_domain: true` cria o DNS sozinho na zona ferraia.com).
 //
 // É um Worker SEPARADO do `ferra-os-web` de propósito: publicar aqui nunca toca o que está no ar em

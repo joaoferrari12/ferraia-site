@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Ferra — o seu negócio numa tela só</title>
-  <meta name="description" content="Pedidos, caixa, estoque, agenda e clientes numa tela só, e o Ferra avisa o que precisa da sua atenção. Para pizzarias, pet shops, barbearias, depósitos e salões. Configurado, não programado." />
+  <title>Sócia — o seu negócio numa tela só</title>
+  <meta name="description" content="Pedidos, caixa, estoque, agenda e clientes numa tela só, e a Sócia avisa o que precisa da sua atenção. Para pizzarias, pet shops, barbearias, depósitos e salões. Configurado, não programado." />
   <link rel="icon" type="image/svg+xml" href="/assets/favicon-app.svg" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <meta name="theme-color" content="#08080A" />
   <link rel="canonical" href="https://ferraia.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Ferra" />
-  <meta property="og:title" content="Ferra — o seu negócio numa tela só" />
-  <meta property="og:description" content="Pedidos, caixa, estoque, agenda e clientes numa tela só, e o Ferra avisa o que precisa da sua atenção." />
+  <meta property="og:site_name" content="Sócia" />
+  <meta property="og:title" content="Sócia — o seu negócio numa tela só" />
+  <meta property="og:description" content="Pedidos, caixa, estoque, agenda e clientes numa tela só, e a Sócia avisa o que precisa da sua atenção." />
   <meta property="og:url" content="https://ferraia.com/" />
   <meta property="og:image" content="https://ferraia.com/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --red: #E11D2E; --black: #08080A; --panel: #0A0A0C; --surface: #101014; --surface-2: #15151A;
+      --red: #7350FA; --black: #08080A; --panel: #0A0A0C; --surface: #101014; --surface-2: #15151A;
       --graphite: #2A2A2F; --white: #F5F5F5; --text-2: #B4B4BC; --text-3: #9A9AA2; --text-4: #8E8E96; --text-5: #6B6B72;
       --ok: #66C68C; --warn: #E5A63C; --line: rgba(255,255,255,.09); --line-strong: rgba(255,255,255,.14);
       --font: Montserrat, system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -72,13 +72,13 @@
 
     /* hero */
     .hero { position: relative; overflow: hidden; }
-    .hero .glow { position: absolute; inset: 0; background: radial-gradient(110% 80% at 80% 30%, rgba(225,29,46,.22) 0%, rgba(225,29,46,0) 60%); pointer-events: none; }
+    .hero .glow { position: absolute; inset: 0; background: radial-gradient(110% 80% at 80% 30%, rgba(115,80,250,.22) 0%, rgba(115,80,250,0) 60%); pointer-events: none; }
     .hero .wrap { position: relative; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; padding-top: 72px; padding-bottom: 64px; }
     @media (min-width: 980px) { .hero .wrap { grid-template-columns: minmax(0, 560px) minmax(0, 1fr); min-height: 640px; padding-top: 48px; } }
     .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
     .eyebrow i { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid var(--red); }
     h1 { font-size: clamp(40px, 5.6vw, 76px); line-height: .96; font-weight: 900; letter-spacing: -.03em; text-transform: uppercase; }
-    h1 em { font-style: normal; color: var(--red); }
+    h1 em { font-style: normal; color: #F2A900; }
     .hero .lead { max-width: 520px; margin-top: 28px; }
     .ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
     .hero-mini { display: flex; gap: 28px; margin-top: 52px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-5); }
@@ -128,7 +128,7 @@
     .card .go::after { content: "→"; color: var(--red); }
     .card.cta { background: var(--red); color: #fff; }
     .card.cta .label, .card.cta p, .card.cta .go::after { color: #fff; }
-    .card.cta:hover { background: #c9152a; }
+    .card.cta:hover { background: #5B2EE6; }
     .portas { display: grid; gap: 22px; margin-top: 48px; grid-template-columns: 1fr; }
     @media (min-width: 720px) { .portas { grid-template-columns: 1fr 1fr; } }
     .porta { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: center; border: 1px solid var(--line); background: var(--surface); padding: 20px; min-width: 0; }
@@ -159,8 +159,8 @@
     .who { display: grid; gap: 36px; grid-template-columns: 1fr; align-items: center; }
     @media (min-width: 900px) { .who { grid-template-columns: minmax(0, 1fr) 380px; } }
     .who .horse { position: relative; min-height: 260px; }
-    .who .horse img { width: 100%; max-width: 380px; margin: 0 auto; -webkit-mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 78%); mask-image: radial-gradient(62% 62% at 50% 50%, #000 35%, transparent 78%); }
-    .who .horse::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 50%, rgba(225,29,46,.18), rgba(225,29,46,0) 70%); pointer-events: none; }
+    .who .horse img { display: block; width: 100%; max-width: 260px; margin: 0 auto; position: relative; z-index: 1; }
+    .who .horse::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 50%, rgba(115,80,250,.30), rgba(91,46,230,0) 70%); pointer-events: none; }
 
     .band { background: var(--red); color: #fff; position: relative; overflow: hidden; }
     .band .wrap { display: grid; gap: 28px; grid-template-columns: 1fr; align-items: center; padding-top: 64px; padding-bottom: 64px; position: relative; }
@@ -187,9 +187,9 @@
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Ferra">
+    <a class="brand" href="#top" aria-label="Sócia">
       <img src="/assets/icone.svg" alt="" width="34" height="34" />
-      <b>Ferra</b>
+      <b>Sócia</b>
     </a>
     <nav>
       <a class="hide-m" href="#tela"><span lang-block="pt">O produto</span><span lang-block="en">Product</span></a>
@@ -216,8 +216,8 @@
         <span lang-block="en">Your business<br />on <em>one</em> screen.</span>
       </h1>
       <p class="lead">
-        <span lang-block="pt">Pedidos, caixa, estoque, agenda e clientes, e o Ferra avisa o que precisa da sua atenção. Pizzaria, pet shop, barbearia, depósito, salão: o mesmo produto, configurado para o seu jeito de trabalhar, não programado por encomenda.</span>
-        <span lang-block="en">Orders, cash, stock, bookings and customers in one place, and Ferra tells you what needs your attention. Pizzeria, pet shop, barbershop, beverage depot, salon: one product, configured to how you work, not custom-coded.</span>
+        <span lang-block="pt">Pedidos, caixa, estoque, agenda e clientes, e a Sócia avisa o que precisa da sua atenção. Pizzaria, pet shop, barbearia, depósito, salão: o mesmo produto, configurado para o seu jeito de trabalhar, não programado por encomenda.</span>
+        <span lang-block="en">Orders, cash, stock, bookings and customers in one place, and Sócia tells you what needs your attention. Pizzeria, pet shop, barbershop, beverage depot, salon: one product, configured to how you work, not custom-coded.</span>
       </p>
       <div class="ctas">
         <a class="btn red" href="https://app.ferraia.com/p/forno-nove"><span lang-block="pt">Ver uma loja de exemplo</span><span lang-block="en">Open a sample store</span></a>
@@ -231,7 +231,7 @@
     </div>
     <div class="shot" data-reveal>
       <div class="bar"><i></i><i></i><i></i><span>app.ferraia.com</span></div>
-      <img data-pt="/assets/telas/forno-nove-inicio.webp" data-en="/assets/telas/harbour-and-hound-inicio.webp" src="/assets/telas/forno-nove-inicio.webp" alt="Ferra home screen: sold today, received, open now and what the business warns about" width="1366" height="768" loading="eager" />
+      <img data-pt="/assets/telas/forno-nove-inicio.webp" data-en="/assets/telas/harbour-and-hound-inicio.webp" src="/assets/telas/forno-nove-inicio.webp" alt="Sócia home screen: sold today, received, open now and what the business warns about" width="1366" height="768" loading="eager" />
     </div>
   </div>
 </section>
@@ -298,8 +298,8 @@
       <span lang-block="en">Seven sample businesses, live right now.</span>
     </h2>
     <p class="lead">
-      <span lang-block="pt">Cada negócio no Ferra ganha um link. O cliente abre no celular, vê o cardápio ou os serviços, pede, marca a hora ou entra na fila, e acompanha sem criar conta. Estes sete são fictícios e ficam vivos todos os dias, com movimento sorteado no horário de Salvador.</span>
-      <span lang-block="en">Every business on Ferra gets a public link. Customers open it on their phone, see the menu or services, order, book a time or join the queue, and track it without an account. These seven are fictional and kept alive every day, with activity generated on Salvador time.</span>
+      <span lang-block="pt">Cada negócio na Sócia ganha um link. O cliente abre no celular, vê o cardápio ou os serviços, pede, marca a hora ou entra na fila, e acompanha sem criar conta. Estes sete são fictícios e ficam vivos todos os dias, com movimento sorteado no horário de Salvador.</span>
+      <span lang-block="en">Every business on Sócia gets a public link. Customers open it on their phone, see the menu or services, order, book a time or join the queue, and track it without an account. These seven are fictional and kept alive every day, with activity generated on Salvador time.</span>
     </p>
     <div class="portas">
       <a class="porta" href="https://app.ferraia.com/p/forno-nove" data-reveal>
@@ -343,13 +343,13 @@
         <span class="go">/p/sabao-de-coco</span>
       </a>
       <a class="card cta" href="https://app.ferraia.com/" data-reveal>
-        <div><span class="label"><span lang-block="pt">Já tem conta?</span><span lang-block="en">Have an account?</span></span><h3><span lang-block="pt">Entrar no Ferra</span><span lang-block="en">Sign in to Ferra</span></h3><p><span lang-block="pt">O lado de dentro: quadro, caixa, estoque, equipe.</span><span lang-block="en">The inside: board, cash, stock, team.</span></p></div>
+        <div><span class="label"><span lang-block="pt">Já tem conta?</span><span lang-block="en">Have an account?</span></span><h3><span lang-block="pt">Entrar na Sócia</span><span lang-block="en">Sign in to Sócia</span></h3><p><span lang-block="pt">O lado de dentro: quadro, caixa, estoque, equipe.</span><span lang-block="en">The inside: board, cash, stock, team.</span></p></div>
         <span class="go">app.ferraia.com</span>
       </a>
     </div>
     <p class="note">
-      <span lang-block="pt">Pessoas, telefones e endereços dos sete negócios são inventados. Fora do horário de cada um, a página diz quando abre. Hoje o Ferra entra por convite: os primeiros negócios de verdade começam em Salvador em dezembro de 2026. Quer o seu lá? <a href="#contato" style="color:var(--white);text-decoration:underline">Fala comigo</a>.</span>
-      <span lang-block="en">People, phone numbers and addresses of the seven businesses are made up. Outside each one's opening hours the page says when it opens. Ferra is invite-only today: the first real businesses go live in Salvador, Brazil, in December 2026. Want yours in? <a href="#contato" style="color:var(--white);text-decoration:underline">Get in touch</a>.</span>
+      <span lang-block="pt">Pessoas, telefones e endereços dos sete negócios são inventados. Fora do horário de cada um, a página diz quando abre. Hoje a Sócia entra por convite: os primeiros negócios de verdade começam em Salvador em dezembro de 2026. Quer o seu lá? <a href="#contato" style="color:var(--white);text-decoration:underline">Fala comigo</a>.</span>
+      <span lang-block="en">People, phone numbers and addresses of the seven businesses are made up. Outside each one's opening hours the page says when it opens. Sócia is invite-only today: the first real businesses go live in Salvador, Brazil, in December 2026. Want yours in? <a href="#contato" style="color:var(--white);text-decoration:underline">Get in touch</a>.</span>
     </p>
   </div>
 </section>
@@ -362,8 +362,8 @@
       <span lang-block="en">One person, AI agents, and everything written down.</span>
     </h2>
     <p class="lead">
-      <span lang-block="pt">O Ferra é construído por um desenvolvedor só, com o Claude Code como método de trabalho e não como autocompletar: cada decisão vira um registro, guardas automáticas recusam publicar quando uma regra quebra, e baterias de teste andam o dia inteiro de negócios fictícios anotando o que está certo e o que está errado.</span>
-      <span lang-block="en">Ferra is built by one developer, using Claude Code as a working method rather than autocomplete: every decision becomes a written record, scripted guards refuse to deploy when a rule breaks, and test batteries walk a full day of fictional businesses, logging what's right and what's wrong.</span>
+      <span lang-block="pt">A Sócia é construída por um desenvolvedor só, com o Claude Code como método de trabalho e não como autocompletar: cada decisão vira um registro, guardas automáticas recusam publicar quando uma regra quebra, e baterias de teste andam o dia inteiro de negócios fictícios anotando o que está certo e o que está errado.</span>
+      <span lang-block="en">Sócia is built by one developer, using Claude Code as a working method rather than autocomplete: every decision becomes a written record, scripted guards refuse to deploy when a rule breaks, and test batteries walk a full day of fictional businesses, logging what's right and what's wrong.</span>
     </p>
     <div class="nums">
       <div class="num" data-reveal><b>210</b><span lang-block="pt">decisões de arquitetura escritas (ADRs), de julho a novembro de 2026</span><span lang-block="en">architecture decision records written, July to November 2026</span></div>
@@ -379,7 +379,7 @@
       </div>
       <div data-reveal>
         <h3><span lang-block="pt">O método, aberto</span><span lang-block="en">The method, in the open</span></h3>
-        <p><span lang-block="pt">O jeito de construir o Ferra está publicado como um pacote de skills do Claude Code: guardas que recusam, baterias que registram certo e errado, vereditos medidos no git. Sem nenhuma linha do código do produto.</span><span lang-block="en">The way Ferra is built is published as an installable Claude Code skills pack: guards that refuse, batteries that log right and wrong, verdicts measured in git. None of the product's code is in it.</span></p>
+        <p><span lang-block="pt">O jeito de construir a Sócia está publicado como um pacote de skills do Claude Code: guardas que recusam, baterias que registram certo e errado, vereditos medidos no git. Sem nenhuma linha do código do produto.</span><span lang-block="en">The way Sócia is built is published as an installable Claude Code skills pack: guards that refuse, batteries that log right and wrong, verdicts measured in git. None of the product's code is in it.</span></p>
         <div class="links">
           <a class="btn ghost" href="https://github.com/joaoferrari12/metodo-agentic">metodo-agentic</a>
           <a class="btn ghost" href="https://github.com/joaoferrari12">GitHub</a>
@@ -393,8 +393,8 @@
   <div class="wrap pad">
     <span class="label"><span lang-block="pt">Seus dados</span><span lang-block="en">Your data</span></span>
     <h2>
-      <span lang-block="pt">O que o Ferra guarda, onde, e quem vê.</span>
-      <span lang-block="en">What Ferra stores, where, and who sees it.</span>
+      <span lang-block="pt">O que a Sócia guarda, onde, e quem vê.</span>
+      <span lang-block="en">What Sócia stores, where, and who sees it.</span>
     </h2>
     <p class="lead">
       <span lang-block="pt">Os dados do seu negócio são do seu negócio. Aqui está o que é verdade hoje, em poucas linhas.</span>
@@ -403,11 +403,11 @@
     <div class="cols">
       <div data-reveal>
         <h3><span lang-block="pt">O que se guarda</span><span lang-block="en">What is stored</span></h3>
-        <p><span lang-block="pt">O que o próprio negócio digita no Ferra: clientes (nome e, se o negócio anotar, telefone, e-mail e documento), pedidos, agenda, estoque, caixa e a equipe com os e-mails de entrada.</span><span lang-block="en">What the business itself types into Ferra: customers (name and, if the business records them, phone, e-mail and ID number), orders, bookings, stock, cash and the team with their sign-in e-mails.</span></p>
+        <p><span lang-block="pt">O que o próprio negócio digita na Sócia: clientes (nome e, se o negócio anotar, telefone, e-mail e documento), pedidos, agenda, estoque, caixa e a equipe com os e-mails de entrada.</span><span lang-block="en">What the business itself types into Sócia: customers (name and, if the business records them, phone, e-mail and ID number), orders, bookings, stock, cash and the team with their sign-in e-mails.</span></p>
       </div>
       <div data-reveal>
         <h3><span lang-block="pt">Onde fica</span><span lang-block="en">Where it lives</span></h3>
-        <p><span lang-block="pt">No banco de dados do Ferra, hospedado em São Paulo, no Brasil (região sa-east-1 da AWS, pelo Supabase). O site e o aplicativo são servidos pela Cloudflare.</span><span lang-block="en">In Ferra's database, hosted in São Paulo, Brazil (AWS region sa-east-1, through Supabase). The site and the app are served by Cloudflare.</span></p>
+        <p><span lang-block="pt">No banco de dados da Sócia, hospedado em São Paulo, no Brasil (região sa-east-1 da AWS, pelo Supabase). O site e o aplicativo são servidos pela Cloudflare.</span><span lang-block="en">In Sócia's database, hosted in São Paulo, Brazil (AWS region sa-east-1, through Supabase). The site and the app are served by Cloudflare.</span></p>
       </div>
       <div data-reveal>
         <h3><span lang-block="pt">Quem vê</span><span lang-block="en">Who can see it</span></h3>
@@ -415,7 +415,7 @@
       </div>
       <div data-reveal>
         <h3><span lang-block="pt">Cartão e Pix</span><span lang-block="en">Cards and Pix</span></h3>
-        <p><span lang-block="pt">O Ferra não guarda número de cartão. O Pix vai direto para a conta do negócio: o Ferra só monta o QR Code com a chave que o dono cadastrou e o valor, e o dinheiro não passa por nós.</span><span lang-block="en">Ferra does not store card numbers. Pix goes straight to the business's own account: Ferra only builds the QR code from the key the owner registered and the amount, and the money never passes through us.</span></p>
+        <p><span lang-block="pt">A Sócia não guarda número de cartão. O Pix vai direto para a conta do negócio: a Sócia só monta o QR Code com a chave que o dono cadastrou e o valor, e o dinheiro não passa por nós.</span><span lang-block="en">Sócia does not store card numbers. Pix goes straight to the business's own account: Sócia only builds the QR code from the key the owner registered and the amount, and the money never passes through us.</span></p>
       </div>
       <div data-reveal>
         <h3><span lang-block="pt">Conexão e cópia</span><span lang-block="en">Connection and copies</span></h3>
@@ -423,7 +423,7 @@
       </div>
       <div data-reveal>
         <h3><span lang-block="pt">Seus direitos (LGPD)</span><span lang-block="en">Your rights (LGPD)</span></h3>
-        <p><span lang-block="pt">Você pode pedir para ver, corrigir ou apagar os dados que o Ferra guarda sobre você ou sobre o seu negócio, e saber com quem eles são compartilhados. Escreva para contato@ferraia.com e eu respondo pessoalmente.</span><span lang-block="en">You can ask to see, correct or delete the data Ferra holds about you or your business, and to know who it is shared with. Write to contato@ferraia.com and I will answer personally.</span></p>
+        <p><span lang-block="pt">Você pode pedir para ver, corrigir ou apagar os dados que a Sócia guarda sobre você ou sobre o seu negócio, e saber com quem eles são compartilhados. Escreva para contato@ferraia.com e eu respondo pessoalmente.</span><span lang-block="en">You can ask to see, correct or delete the data Sócia holds about you or your business, and to know who it is shared with. Write to contato@ferraia.com and I will answer personally.</span></p>
       </div>
     </div>
   </div>
@@ -438,20 +438,20 @@
         <span lang-block="en">Built in Vancouver, for Salvador.</span>
       </h2>
       <p class="lead">
-        <span lang-block="pt">João Victor Ferrari Fonseca, fundador e desenvolvedor. A família dele tem um pet shop em Salvador; ele estuda Sistemas de Computação no BCIT, em Vancouver, e constrói o Ferra desde julho de 2026 para os negócios pequenos que ainda operam no papel e no WhatsApp.</span>
-        <span lang-block="en">João Victor Ferrari Fonseca, founder and developer. His family runs a pet shop in Salvador, Brazil; he studies Computer Systems at BCIT in Vancouver, and has been building Ferra since July 2026 for the small businesses that still run on paper and WhatsApp.</span>
+        <span lang-block="pt">João Victor Ferrari Fonseca, fundador e desenvolvedor. A família dele tem um pet shop em Salvador; ele estuda Sistemas de Computação no BCIT, em Vancouver, e constrói a Sócia desde julho de 2026 para os negócios pequenos que ainda operam no papel e no WhatsApp.</span>
+        <span lang-block="en">João Victor Ferrari Fonseca, founder and developer. His family runs a pet shop in Salvador, Brazil; he studies Computer Systems at BCIT in Vancouver, and has been building Sócia since July 2026 for the small businesses that still run on paper and WhatsApp.</span>
       </p>
       <div class="links">
         <a class="btn red" href="https://www.linkedin.com/in/joaoferrari12">LinkedIn</a>
         <a class="btn ghost" href="https://github.com/joaoferrari12">GitHub</a>
       </div>
     </div>
-    <div class="horse" data-reveal><img src="/assets/cavalo.png" alt="" loading="lazy" /></div>
+    <div class="horse" data-reveal><img src="/assets/estrela.svg" alt="" loading="lazy" /></div>
   </div>
 </section>
 
 <section class="band" id="contato">
-  <div class="emblem" aria-hidden="true"><img src="/assets/emblema-branco.svg" alt="" /></div>
+  <div class="emblem" aria-hidden="true"><img src="/assets/estrela-branca.svg" alt="" /></div>
   <div class="wrap">
     <div>
       <span class="label"><span lang-block="pt">Para o seu negócio</span><span lang-block="en">For your business</span></span>
@@ -460,13 +460,13 @@
         <span lang-block="en">Run a small business? Let's talk.</span>
       </h2>
       <p>
-        <span lang-block="pt">Pizzaria, pet shop, barbearia, depósito, salão, lava-jato. Em dezembro de 2026 os primeiros negócios de Salvador entram no Ferra, e eu monto cada um pessoalmente. Me chama no WhatsApp ou escreve para contato@ferraia.com e me conta como é o seu dia.</span>
-        <span lang-block="en">Pizzeria, pet shop, barbershop, depot, salon, car wash. In December 2026 the first businesses in Salvador go live on Ferra, and I set each one up in person. Message me on WhatsApp or write to contato@ferraia.com and tell me how your day works.</span>
+        <span lang-block="pt">Pizzaria, pet shop, barbearia, depósito, salão, lava-jato. Em dezembro de 2026 os primeiros negócios de Salvador entram na Sócia, e eu monto cada um pessoalmente. Me chama no WhatsApp ou escreve para contato@ferraia.com e me conta como é o seu dia.</span>
+        <span lang-block="en">Pizzeria, pet shop, barbershop, depot, salon, car wash. In December 2026 the first businesses in Salvador go live on Sócia, and I set each one up in person. Message me on WhatsApp or write to contato@ferraia.com and tell me how your day works.</span>
       </p>
     </div>
     <div class="links">
-      <a class="btn white" href="https://wa.me/16047251622?text=Oi%2C%20Jo%C3%A3o!%20Vi%20o%20Ferra%20em%20ferraia.com%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." rel="noopener"><span lang-block="pt">WhatsApp +1 604 725-1622</span><span lang-block="en">WhatsApp +1 604 725-1622</span></a>
-      <a class="btn line" href="mailto:contato@ferraia.com?subject=Ferra"><span lang-block="pt">contato@ferraia.com</span><span lang-block="en">contato@ferraia.com</span></a>
+      <a class="btn white" href="https://wa.me/16047251622?text=Oi%2C%20Jo%C3%A3o!%20Vi%20a%20S%C3%B3cia%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." rel="noopener"><span lang-block="pt">WhatsApp +1 604 725-1622</span><span lang-block="en">WhatsApp +1 604 725-1622</span></a>
+      <a class="btn line" href="mailto:contato@ferraia.com?subject=Sócia"><span lang-block="pt">contato@ferraia.com</span><span lang-block="en">contato@ferraia.com</span></a>
       <a class="btn line" href="https://app.ferraia.com/p/forno-nove"><span lang-block="pt">Ver uma loja de exemplo</span><span lang-block="en">Open a sample store</span></a>
     </div>
   </div>
@@ -474,7 +474,7 @@
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Ferra IA · ferraia.com</span>
+    <span>© 2026 Sócia · ferraia.com</span>
     <span><a href="https://wa.me/16047251622" rel="noopener">WhatsApp +1 604 725-1622</a> · <a href="mailto:contato@ferraia.com">contato@ferraia.com</a> · <a href="https://app.ferraia.com/">app.ferraia.com</a> · <a href="https://app.ferraia.com/p/forno-nove"><span lang-block="pt">loja de exemplo</span><span lang-block="en">sample store</span></a> · <a href="https://github.com/joaoferrari12/metodo-agentic">metodo-agentic</a></span>
   </div>
 </footer>
@@ -490,7 +490,7 @@
   function setLang(l) {
     html.setAttribute('data-lang', l);
     html.setAttribute('lang', l === 'pt' ? 'pt-BR' : 'en');
-    document.title = l === 'pt' ? 'Ferra — o seu negócio numa tela só' : 'Ferra — your whole business on one screen';
+    document.title = l === 'pt' ? 'Sócia — o seu negócio numa tela só' : 'Sócia — your whole business on one screen';
     var btns = document.querySelectorAll('[data-set-lang]');
     for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', String(btns[i].getAttribute('data-set-lang') === l));
     try { localStorage.setItem('ferra-site.lang', l); } catch (e) {}
