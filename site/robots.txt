@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://ferraia.com/sitemap.xml
+Sitemap: https://oisocia.com.br/sitemap.xml

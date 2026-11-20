@@ -13,6 +13,9 @@
     "html_handling": "auto-trailing-slash"
   },
   "routes": [
+    { "pattern": "oisocia.com.br", "custom_domain": true },
+    { "pattern": "www.oisocia.com.br", "custom_domain": true },
+    // ADR-210: os dois de baixo ficam presos; a Redirect Rule da zona ferraia.com leva ao endereço novo.
     { "pattern": "ferraia.com", "custom_domain": true },
     { "pattern": "www.ferraia.com", "custom_domain": true }
   ]
