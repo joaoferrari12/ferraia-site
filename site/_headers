@@ -1,4 +1,4 @@
-# Cabecalhos de seguranca da ferraia.com (17/11/2026), os mesmos do app.ferraia.com (ADR-154) menos a CSP:
+# Cabecalhos de seguranca da oisocia.com.br (17/11/2026), os mesmos do app.oisocia.com.br (ADR-154) menos a CSP:
 # a pagina tem CSS e JS embutidos no index.html, e uma CSP aqui sem medir quebraria o idioma e o tour.
 /*
   X-Content-Type-Options: nosniff
