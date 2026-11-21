@@ -1,9 +1,21 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-lang="pt">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sócia — página não encontrada</title>
+  <meta name="robots" content="noindex" />
+  <script>
+    // A mesma escolha da página inicial: ?lang= -> o que a pessoa escolheu -> o navegador (pt, es, o resto em inglês).
+    (function () {
+      var L = ['pt', 'en', 'es'], l = null;
+      try { var q = new URLSearchParams(location.search).get('lang'); if (L.indexOf(q) !== -1) l = q; } catch (e) {}
+      try { var s = localStorage.getItem('ferra-site.lang'); if (!l && L.indexOf(s) !== -1) l = s; } catch (e) {}
+      if (!l) { var n = ((navigator.languages && navigator.languages[0]) || navigator.language || 'en').toLowerCase(); l = n.indexOf('pt') === 0 ? 'pt' : n.indexOf('es') === 0 ? 'es' : 'en'; }
+      var h = document.documentElement; h.setAttribute('data-lang', l); h.setAttribute('lang', l === 'pt' ? 'pt-BR' : l);
+      document.title = { pt: 'Sócia — página não encontrada', en: 'Sócia — page not found', es: 'Sócia — página no encontrada' }[l];
+    })();
+  </script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon-app.svg" />
   <style>
     html, body { margin: 0; background: #08080A; color: #F5F5F5; font-family: Montserrat, system-ui, sans-serif; }
@@ -11,11 +23,12 @@
     h1 { font-size: clamp(32px, 6vw, 64px); font-weight: 900; letter-spacing: -.03em; text-transform: uppercase; margin: 0; }
     p { color: #B4B4BC; margin: 18px 0 0; }
     a { display: inline-block; margin-top: 28px; background: #19C37D; color: #06281A; text-decoration: none; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; padding: 16px 26px; }
+    html:not([data-lang="pt"]) [lang-block="pt"], html:not([data-lang="en"]) [lang-block="en"], html:not([data-lang="es"]) [lang-block="es"] { display: none !important; }
   </style>
 </head>
 <body><main><div>
-  <h1>Não achei essa página.</h1>
-  <p>This page doesn't exist. A loja de exemplo e o produto estão na página inicial.</p>
+  <h1><span lang-block="pt">Não achei essa página.</span><span lang-block="en">I couldn't find that page.</span><span lang-block="es">No encontré esa página.</span></h1>
+  <p><span lang-block="pt">A loja de exemplo e o produto estão na página inicial.</span><span lang-block="en">The sample store and the product are on the home page.</span><span lang-block="es">La tienda de ejemplo y el producto están en la página de inicio.</span></p>
   <a href="/">oisocia.com.br</a>
 </div></main></body>
 </html>
