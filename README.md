@@ -26,24 +26,39 @@ e a ADR-210 (o nome Sócia, o verde, o endereço novo).
 - `site/404.html` — a mesma escolha de língua, nas três.
 - `site/sitemap.xml` e os `hreflang` do `<head>` — uma URL só (`/`), com os alternates `/?lang=pt|en|es`.
   As metas estáticas (`title`, `description`, `og:`) são em português: quem lê sem rodar o script vê pt.
-- `site/assets/telas/*.webp` — capturas **do ar**, das vitrines (negócios fictícios, ADR-186). As que a página
-  usa foram refeitas em 19/11/2026 (Sócia em verde, ADR-210) pelo `.tmp-sessao/vitrine/scripts/vitrine-socia.mjs`
-  (roda de dentro do `ferra-os-web`, login guardado por `guardar-senha-vitrine.ps1`; sai em
-  `.tmp-sessao/vitrine/socia-pt` e `socia-en`); as portas públicas (`/p/<link>`) pelo `vitrine-porta.mjs`, sem login.
-  Nome: `<empresa>-<tela>.webp`, `-m-` = celular. Conversão: `python3 -I telas.py <pasta>` (pt) e
-  `python3 -I telas.py <pasta> en`.
-  **A versão em inglês tem telas em inglês**: `harbour-and-hound-*` é a demo Harbour & Hound Grooming
-  (en · CAD · Vancouver) e `<empresa>-en-*` / `porta-*-en` são as vitrines com a interface em inglês (`?lang=en`).
-  **Não há capturas em espanhol: no `es` a página mostra as de português** (`data-es` igual a `data-pt`,
-  `TABS[].img.es` igual a `.pt`). Para ter: somar `es` ao `PLANO` do `vitrine-socia.mjs` (a demo em espanhol é a
-  Luthería Santa Cecilia; as vitrines com `?lang=es`), `python3 -I telas.py <pasta> es` e trocar `data-es` e `TABS`.
-  ⚠️ **As capturas de dentro do app são de ANTES do molde (ADR-211, publicado em 20 e 21/11/2026)**: mostram a
-  barra de baixo antiga e o cartão "O negócio avisa"; o app hoje tem a pílula com a Estrela, "Pergunte à Sócia" e
-  o "Achado da Sócia". Refazer com o mesmo script (precisa do login dele no ar).
-  Sobras sem uso na página, de 06/11 (marca antiga): 15 `telas/*.webp` (`forno-nove-agenda`, `-balcao`,
-  `-clientes`, `-entregas`, `-mesas`, `-m-mesas`, `-relatorios`, `baia-de-espuma-quadro`, `jangada-azul-inicio`,
-  `-quadro`, `patas-e-cia-agenda`, `-clientes`, `-m-agenda`, `-m-inicio`, `-quadro`), `cavalo.png` e
-  `emblema-branco.svg`.
+- `site/assets/telas/*.webp` — capturas **do ar**, das vitrines (negócios fictícios, ADR-186). As 61 que a página
+  usa foram refeitas em **21/11/2026, depois do molde** (ADR-211: a pílula com a Estrela, "Pergunte à Sócia ou
+  pesquise", o cartão "Achado da Sócia"), **nas três línguas**: 20 em português, 21 em inglês, 20 em espanhol.
+  O script é o `.tmp-sessao/molde/capturas-socia.mjs` (cópia adaptada do `vitrine/scripts/vitrine-socia.mjs`): roda
+  de dentro do `ferra-os-web`, com o login guardado por `guardar-senha-vitrine.ps1`, entra em
+  `app.oisocia.com.br/?lang=<lingua>` (o `?lang=` fica guardado no navegador e manda mais que a língua da empresa),
+  espera a tela parada (sem esqueleto, animações finitas terminadas), recarrega se a consulta estourar o tempo e só lê.
+  Sai em `.tmp-sessao/molde/capturas/socia-pt`, `socia-en` e `socia-es`; as duas portas públicas (`/p/<link>`, sem
+  login, na língua do aparelho) saem do mesmo script.
+
+  ```powershell
+  cd C:\Users\jones\projetos\ferra-os-web
+  $env:NODE_ENV='development'; node ..\.tmp-sessao\molde\capturas-socia.mjs            # tudo
+  $env:NODE_ENV='development'; node ..\.tmp-sessao\molde\capturas-socia.mjs pt,es "pizzaria-forno-nove"   # só um pedaço (expressão regular sobre <lingua>/<arquivo>)
+  ```
+
+  Nome: `<empresa>-<tela>.webp`, `-m-` = celular. Conversão (precisa do Pillow; na máquina dele está no Python da VM
+  Linux, não no do Windows): `python3 -I telas.py <pasta>` (pt), `python3 -I telas.py <pasta> en` e
+  `python3 -I telas.py <pasta> es`.
+  **Cada língua tem as telas dela**: em inglês, `harbour-and-hound-*` é a demo Harbour & Hound Grooming
+  (en · CAD · Vancouver) e `<empresa>-en-*` / `porta-*-en` são as vitrines com a interface em inglês; em espanhol,
+  `<empresa>-es-*` / `porta-*-es` são as mesmas lojas e rotas do português com a interface em espanhol (`?lang=es`).
+  A página troca por `data-pt` / `data-en` / `data-es` e por `TABS[].img` / `.phone`.
+  ⚠️ **A pizzaria abre às 18h de Salvador**: antes disso o Início e o Quadro dela saem vazios ("Nada fechado ainda").
+  Fotografar depois das 19h30 de lá (as de 21/11 são das 19h50: R$ 277,40 vendidos, 6 pedidos abertos).
+  ⚠️ O texto que descreve tela (legendas do trio, `alt` da captura do topo, `TABS`) cita o que a captura mostra
+  (o "Achado da Sócia", a Coca-Cola 2 L que acaba dia 03/12, a ração do pet shop): **refez a captura, releia o texto**.
+  O `telas.py` converte tudo o que está na pasta; o script também fotografa o Início da barbearia no celular, que a
+  página não usa (`baia-de-espuma-m-inicio`, `-es-m-inicio`): apagar depois de converter.
+  Sobras sem uso na página, de 06/11 (marca antiga), esperando a decisão dele: 15 `telas/*.webp`
+  (`forno-nove-agenda`, `-balcao`, `-clientes`, `-entregas`, `-mesas`, `-m-mesas`, `-relatorios`,
+  `baia-de-espuma-quadro`, `jangada-azul-inicio`, `-quadro`, `patas-e-cia-agenda`, `-clientes`, `-m-agenda`,
+  `-m-inicio`, `-quadro`), `cavalo.png` e `emblema-branco.svg`.
 - `site/assets/` — `icone.svg` e `favicon-app.svg` (a Estrela no ladrilho verde, ADR-210), `estrela.svg` e
   `estrela-branca.svg`, `apple-touch-icon.png`, `og-image.png` (Sócia, "A sócia que não divide o lucro").
 - `site/_headers` — cabeçalhos de segurança (17/11/2026): os do app (ADR-154) menos a CSP, que espera medir o CSS e o JS embutidos.
@@ -78,7 +93,8 @@ Conferir com os olhos depois: `https://oisocia.com.br` em pt, en e es, a 360 e a
 Este repositório não tem verificador próprio. A medida de 21/11/2026 (as três línguas a 320, 360 e 1366: nenhum
 bloco de outra língua visível, os três conjuntos com o mesmo número de blocos, nenhuma rolagem lateral, o seletor
 marcando a língua certa, a escolha sobrevivendo ao recarregar, os links do app com `?lang=`) saiu do
-`.tmp-sessao/molde/verifica-vitrine-es.mjs`, com o Playwright do `ferra-os-web`.
+`.tmp-sessao/molde/verifica-vitrine-es.mjs`, com o Playwright do `ferra-os-web`. Com as capturas novas, a cópia
+`verifica-vitrine-capturas.mjs` deu 356 medidas, 0 falhas (nenhuma imagem quebrada, nenhum arquivo pedido e não achado).
 
 ## Números que a página afirma (medidos em 06/11/2026, remedidos em 17/11, 18/11 e 21/11/2026; atualizar quando mudarem)
 

@@ -1,4 +1,7 @@
-"""Converte as capturas do ar (PNG 2x) para site/assets/telas/*.webp. Uso: python3 -I telas.py <pasta-das-fotos>"""
+"""Converte as capturas do ar (PNG 2x) para site/assets/telas/*.webp.
+
+Uso: python3 -I telas.py <pasta-das-fotos> [en|es]   (sem língua = português, sem sufixo)
+"""
 import sys, os
 from PIL import Image
 
@@ -12,9 +15,13 @@ EMPRESA = {
     'barbearia-baia-de-espuma': 'baia-de-espuma',
     'harbour-hound-grooming': 'harbour-and-hound',
 }
-# `python3 -I telas.py <pasta> en`: fotos tiradas com a interface em ingles (?lang=en); as empresas em portugues
-# ganham o sufixo `-en` (forno-nove-en-inicio); a Harbour & Hound ja e inglesa e fica sem sufixo.
-SUFIXO = ('-' + sys.argv[2]) if len(sys.argv) > 2 else ''
+# `python3 -I telas.py <pasta> en` / `es`: fotos tiradas com a interface em ingles ou em espanhol (?lang=en, ?lang=es);
+# as empresas em portugues ganham o sufixo da lingua (forno-nove-en-inicio, forno-nove-es-m-quadro, porta-forno-nove-es);
+# a Harbour & Hound ja e inglesa e fica sem sufixo. `pt` (ou nada) = sem sufixo.
+LINGUA = sys.argv[2] if len(sys.argv) > 2 else 'pt'
+if LINGUA not in ('pt', 'en', 'es'):
+    sys.exit('lingua desconhecida: ' + LINGUA + ' (use pt, en ou es)')
+SUFIXO = '' if LINGUA == 'pt' else '-' + LINGUA
 n = 0
 for f in sorted(os.listdir(SRC)):
     if not f.endswith('.png') or '--' not in f:
