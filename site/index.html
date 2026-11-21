@@ -77,6 +77,8 @@
     .lang button[aria-pressed="true"] { background: var(--white); color: #0A0A0A; }
     .nav .btn { padding: 12px 18px; font-size: 11px; }
     /* Três línguas no seletor: abaixo de 360 px o topo aperta para não rolar de lado. */
+    /* 21/11/2026: com três línguas o seletor passava por cima do nome a 360 px (medido na captura). */
+    @media (max-width: 419px) { .nav .wrap, .nav nav { gap: 10px; } .brand { gap: 8px; flex-shrink: 0; } .brand b { font-size: 18px; } .lang button { padding: 8px 6px; letter-spacing: .06em; } .nav .btn { padding: 12px 10px; letter-spacing: .08em; } }
     @media (max-width: 359px) { .nav .wrap, .nav nav { gap: 12px; } .lang button { padding: 8px 7px; } .nav .btn { padding: 12px; } }
     @media (max-width: 359px) { .btn { white-space: normal; text-align: center; } .hero .wrap > div { min-width: 0; } }
 
