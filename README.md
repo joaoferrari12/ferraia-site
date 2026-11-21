@@ -52,7 +52,7 @@ e a ADR-210 (o nome Sócia, o verde, o endereço novo).
   ⚠️ **A pizzaria abre às 18h de Salvador**: antes disso o Início e o Quadro dela saem vazios ("Nada fechado ainda").
   Fotografar depois das 19h30 de lá (as de 21/11 são das 19h50: R$ 277,40 vendidos, 6 pedidos abertos).
   ⚠️ O texto que descreve tela (legendas do trio, `alt` da captura do topo, `TABS`) cita o que a captura mostra
-  (o "Achado da Sócia", a Coca-Cola 2 L que acaba dia 03/12, a ração do pet shop): **refez a captura, releia o texto**.
+  (o "Achado da Sócia", a Coca-Cola 2 L que vai acabar; a legenda NÃO cita a data, que envelhece em dias, a ração do pet shop): **refez a captura, releia o texto**.
   O `telas.py` converte tudo o que está na pasta; o script também fotografa o Início da barbearia no celular, que a
   página não usa (`baia-de-espuma-m-inicio`, `-es-m-inicio`): apagar depois de converter.
   Sobras sem uso na página, de 06/11 (marca antiga), esperando a decisão dele: 15 `telas/*.webp`
