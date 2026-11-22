@@ -30,17 +30,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --red: #19C37D; --red-fundo: #0E7A50; --black: #08080A; --panel: #0A0A0C; --surface: #101014; --surface-2: #15151A;
+      /* O MOLDE DA SÓCIA (ADR-211): os mesmos valores do app (`ferra-os-web/src/index.css`, tema escuro): a marca, o
+         fundo suave do que está escolhido, o ouro e a tinta da Estrela, as duas curvas e as três velocidades. Mudou lá,
+         muda aqui. `--red` é o nome antigo do acento (do tempo do vermelho) e hoje só aponta para a marca. */
+      --brand: #19C37D; --brand-suave: #123526; --marca-ouro: #F2A900; --marca-tinta: #0B1F17;
+      --ease-mola: cubic-bezier(0.34, 1.4, 0.64, 1); --ease-suave: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --duration-rapido: 150ms; --duration-padrao: 420ms; --duration-lento: 560ms;
+      --raio-p: 8px; --raio: 12px; --raio-g: 16px;
+      --red: var(--brand); --red-fundo: #0E7A50; --black: #08080A; --panel: #0A0A0C; --surface: #101014; --surface-2: #15151A;
       --graphite: #2A2A2F; --white: #F5F5F5; --text-2: #B4B4BC; --text-3: #9A9AA2; --text-4: #8E8E96; --text-5: #6B6B72;
       --ok: #66C68C; --warn: #E5A63C; --line: rgba(255,255,255,.09); --line-strong: rgba(255,255,255,.14);
       --font: Montserrat, system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace;
-      --max: 1280px; --gutter: 28px; --section-y: clamp(72px, 9vw, 112px);
+      --max: 1280px; --gutter: clamp(16px, 5vw, 28px); --section-y: clamp(80px, 10vw, 128px);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     html, body { margin: 0; padding: 0; background: var(--black); color: var(--white); }
     body { font-family: var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
     a { color: inherit; text-decoration: none; }
+    /* Foco visível (molde): o anel da marca, afastado, em tudo o que se alcança pelo teclado. */
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: var(--raio-p); }
+    .btn:focus-visible, .tabs button:focus-visible, .porta:focus-visible, .card:focus-visible { border-radius: inherit; }
     img { display: block; max-width: 100%; height: auto; }
     ::selection { background: var(--red); color: #06281A; }
     [lang-block] { display: contents; }
@@ -49,11 +59,12 @@
     .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
     .label { font-family: var(--mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--red); }
     .label.dim { color: var(--text-5); }
-    .rule { width: 56px; height: 3px; background: var(--red); margin: 28px 0; }
+    .rule { width: 56px; height: 3px; border-radius: 3px; background: var(--red); margin: 28px 0; }
     h1, h2, h3 { margin: 0; text-wrap: balance; }
     h2 { font-size: clamp(30px, 3.8vw, 54px); line-height: 1.04; font-weight: 900; letter-spacing: -.025em; margin-top: 22px; }
     .lead { font-size: clamp(16px, 1.3vw, 19px); line-height: 1.65; color: var(--text-2); max-width: 620px; margin: 22px 0 0; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; padding: 18px 28px; border: 1px solid transparent; transition: background .15s, color .15s, border-color .15s; white-space: nowrap; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; max-width: 100%; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; padding: 14px 28px; border: 1px solid transparent; border-radius: var(--raio); transition: background var(--duration-rapido) var(--ease-suave), color var(--duration-rapido) var(--ease-suave), border-color var(--duration-rapido) var(--ease-suave), transform var(--duration-rapido) var(--ease-mola); white-space: nowrap; }
+    .btn:active { transform: scale(.97); }
     .btn.red { background: var(--red); color: #06281A; }
     .btn.red:hover { background: var(--white); color: #0A0A0A; }
     .btn.ghost { border-color: rgba(255,255,255,.26); color: var(--white); }
@@ -65,59 +76,75 @@
     /* nav */
     .nav { position: sticky; top: 0; z-index: 60; background: rgba(8,8,10,.84); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
     .nav .wrap { min-height: 72px; display: flex; align-items: center; gap: 24px; }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand img { height: 34px; width: 34px; }
+    .brand { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+    /* A ESTRELA VIVA, o desenho e o anel do app (`components/ferra/marca.tsx`, `components/socia/estrela-viva.tsx`): o anel
+       em `--brand-suave`, a Estrela em ouro e tinta. Ela chega com mola e o anel respira duas vezes (4,8 s) e para: no app
+       a Estrela parada não se mexe (nada de laço sem motivo, WCAG 2.2.2). Volta a respirar com o ponteiro ou o foco em cima.
+       Só `transform` e `opacity`; quem pediu menos movimento vê a Estrela parada. */
+    .estrela-viva { position: relative; flex: none; width: 44px; height: 44px; display: grid; place-items: center; }
+    .estrela-viva::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--brand-suave); animation: estrela-respira 2.4s ease-in-out 2; }
+    .estrela-viva svg { position: relative; display: block; width: 32px; height: 32px; animation: estrela-chega var(--duration-lento) var(--ease-mola) both; transition: transform var(--duration-padrao) var(--ease-mola); }
+    .brand:hover .estrela-viva::before, .brand:focus-visible .estrela-viva::before { animation: estrela-respira-de-novo 2.4s ease-in-out infinite; }
+    .brand:hover .estrela-viva svg, .brand:focus-visible .estrela-viva svg { transform: rotate(-8deg) scale(1.08); }
+    @keyframes estrela-respira { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.14); opacity: .55; } }
+    @keyframes estrela-respira-de-novo { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.14); opacity: .55; } }
+    @keyframes estrela-chega { from { transform: scale(.4) rotate(-90deg); opacity: 0; } to { transform: none; opacity: 1; } }
     .brand b { font-size: 20px; font-weight: 900; letter-spacing: -.02em; }
     .nav nav { margin-left: auto; display: flex; align-items: center; gap: 22px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
     .nav nav a:hover { color: var(--white); }
     .nav nav .hide-m { display: none; }
-    @media (min-width: 880px) { .nav nav .hide-m { display: inline; } }
-    .lang { display: inline-flex; border: 1px solid var(--line-strong); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; }
-    .lang button { background: none; border: 0; color: var(--text-3); padding: 8px 10px; cursor: pointer; font: inherit; letter-spacing: inherit; }
+    @media (min-width: 880px) { .nav nav .hide-m { display: inline-flex; align-items: center; min-height: 44px; } }
+    .lang { display: inline-flex; flex: none; border: 1px solid var(--line-strong); border-radius: var(--raio); overflow: hidden; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; }
+    .lang button { background: none; border: 0; color: var(--text-3); min-width: 44px; min-height: 44px; padding: 0 8px; cursor: pointer; font: inherit; letter-spacing: inherit; transition: background var(--duration-rapido) var(--ease-suave), color var(--duration-rapido) var(--ease-suave); }
+    .lang button:hover { color: var(--white); }
     .lang button[aria-pressed="true"] { background: var(--white); color: #0A0A0A; }
-    .nav .btn { padding: 12px 18px; font-size: 11px; }
+    .lang button:focus-visible { outline-offset: -3px; border-radius: var(--raio); }
+    .nav .btn { min-height: 44px; padding: 10px 18px; font-size: 11px; flex: none; }
     /* Três línguas no seletor: abaixo de 360 px o topo aperta para não rolar de lado. */
     /* 21/11/2026: com três línguas o seletor passava por cima do nome a 360 px (medido na captura). */
-    @media (max-width: 419px) { .nav .wrap, .nav nav { gap: 10px; } .brand { gap: 8px; flex-shrink: 0; } .brand b { font-size: 18px; } .lang button { padding: 8px 6px; letter-spacing: .06em; } .nav .btn { padding: 12px 10px; letter-spacing: .08em; } }
-    @media (max-width: 359px) { .nav .wrap, .nav nav { gap: 12px; } .lang button { padding: 8px 7px; } .nav .btn { padding: 12px; } }
+    /* Molde: os três botões têm 44 px de altura em toda largura; no celular estreitam (40, 36 px) para caber com o nome. */
+    @media (max-width: 439px) { .nav .wrap, .nav nav { gap: 8px; } .brand { gap: 6px; flex-shrink: 0; } .brand b { font-size: 18px; } .estrela-viva { width: 40px; height: 40px; } .estrela-viva svg { width: 29px; height: 29px; } .lang button { min-width: 40px; padding: 0 4px; letter-spacing: .06em; } .nav .btn { padding: 10px; letter-spacing: .08em; } }
+    @media (min-width: 390px) and (max-width: 439px) { .lang button { min-width: 44px; } }
+    @media (max-width: 359px) { .nav .wrap, .nav nav { gap: 6px; } .brand { gap: 5px; } .brand b { font-size: 17px; } .estrela-viva { width: 36px; height: 36px; } .estrela-viva svg { width: 26px; height: 26px; } .lang button { min-width: 36px; padding: 0 3px; } .nav .btn { padding: 10px 8px; } }
     @media (max-width: 359px) { .btn { white-space: normal; text-align: center; } .hero .wrap > div { min-width: 0; } }
 
     /* hero */
     .hero { position: relative; overflow: hidden; }
     .hero .glow { position: absolute; inset: 0; background: radial-gradient(110% 80% at 80% 30%, rgba(25,195,125,.22) 0%, rgba(25,195,125,0) 60%); pointer-events: none; }
-    .hero .wrap { position: relative; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; padding-top: 72px; padding-bottom: 64px; }
+    .hero .wrap { position: relative; display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; padding-top: 72px; padding-bottom: 72px; }
     @media (min-width: 980px) { .hero .wrap { grid-template-columns: minmax(0, 560px) minmax(0, 1fr); min-height: 640px; padding-top: 48px; } }
     .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
     .eyebrow i { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid var(--red); }
     h1 { font-size: clamp(40px, 5.6vw, 76px); line-height: .96; font-weight: 900; letter-spacing: -.03em; text-transform: uppercase; }
-    h1 em { font-style: normal; color: #F2A900; }
+    h1 em { font-style: normal; color: var(--marca-ouro); }
     /* "PANTALLA." é a palavra mais larga das três línguas: a 40 px não cabe em 320. */
     @media (max-width: 379px) { html[data-lang="es"] h1 { font-size: 34px; } }
     .hero .lead { max-width: 520px; margin-top: 28px; }
     .ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
     .hero-mini { display: flex; gap: 28px; margin-top: 52px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-5); }
-    .shot { position: relative; border: 1px solid var(--line-strong); background: var(--surface); box-shadow: 0 60px 120px -40px rgba(0,0,0,.95); }
+    .shot { position: relative; border: 1px solid var(--line-strong); border-radius: var(--raio-g); overflow: hidden; background: var(--surface); box-shadow: 0 24px 56px -28px rgba(0,0,0,.7); }
     .shot .bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: #0C0C10; }
     .shot .bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--graphite); display: inline-block; margin-right: 5px; }
-    .shot .bar span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--mono); font-size: 10px; color: var(--text-5); background: var(--surface-2); border: 1px solid rgba(255,255,255,.07); padding: 4px 10px; }
+    .shot .bar span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--mono); font-size: 10px; color: var(--text-5); background: var(--surface-2); border: 1px solid rgba(255,255,255,.07); border-radius: 999px; padding: 4px 10px; }
     .shot img { width: 100%; }
     .hero .shot { transform: perspective(1400px) rotateY(-4deg); }
     @media (max-width: 979px) { .hero .shot { transform: none; } }
 
     /* thesis: same screen, other business */
-    .trio { display: grid; gap: 18px; margin-top: 56px; grid-template-columns: 1fr; }
+    .trio { display: grid; gap: 20px; margin-top: 56px; grid-template-columns: 1fr; }
     @media (min-width: 820px) { .trio { grid-template-columns: repeat(3, 1fr); } }
-    .trio figure { margin: 0; border: 1px solid var(--line); background: var(--surface); }
+    .trio figure { margin: 0; border: 1px solid var(--line); border-radius: var(--raio-g); overflow: hidden; background: var(--surface); }
     .trio figure img { width: 100%; aspect-ratio: 1366 / 768; object-fit: cover; object-position: top; }
-    .trio figcaption { padding: 14px 16px 16px; border-top: 1px solid var(--line); }
+    .trio figcaption { padding: 16px 18px 18px; border-top: 1px solid var(--line); }
     .trio figcaption b { display: block; font-size: 15px; font-weight: 700; }
     .trio figcaption span { display: block; margin-top: 4px; font-size: 13px; color: var(--text-4); line-height: 1.5; }
     .kicker { margin: 48px 0 0; font-size: clamp(18px, 1.8vw, 24px); font-weight: 600; max-width: 820px; line-height: 1.45; }
 
     /* tour */
-    .tabs { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 36px; }
-    .tabs button { font: inherit; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-4); background: var(--surface); border: 1px solid var(--line); padding: 12px 16px; cursor: pointer; }
-    .tabs button[aria-selected="true"] { color: var(--white); border-color: var(--red); background: var(--surface-2); }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
+    .tabs button { font: inherit; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-4); background: var(--surface); border: 1px solid var(--line); border-radius: var(--raio); min-height: 44px; padding: 10px 16px; cursor: pointer; transition: background var(--duration-rapido) var(--ease-suave), color var(--duration-rapido) var(--ease-suave), border-color var(--duration-rapido) var(--ease-suave), transform var(--duration-rapido) var(--ease-mola); }
+    .tabs button:active { transform: scale(.96); }
+    .tabs button[aria-selected="true"] { color: var(--white); border-color: var(--brand); background: var(--brand-suave); }
     .tabs button:hover { color: var(--white); }
     .tour { display: grid; gap: 28px; margin-top: 28px; grid-template-columns: 1fr; align-items: start; }
     @media (min-width: 980px) { .tour { grid-template-columns: minmax(0, 1fr) 300px; } }
@@ -126,27 +153,30 @@
     .tour .desc { padding: 6px 0; }
     .tour .desc h3 { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
     .tour .desc p { margin: 12px 0 0; font-size: 15px; line-height: 1.65; color: var(--text-2); }
-    .phone { width: 220px; border: 8px solid #15151A; border-radius: 34px; overflow: hidden; background: #000; box-shadow: 0 40px 80px -30px rgba(0,0,0,.9); margin: 28px auto 0; }
+    .phone { width: 220px; border: 8px solid #15151A; border-radius: 34px; overflow: hidden; background: #000; box-shadow: 0 20px 44px -24px rgba(0,0,0,.7); margin: 28px auto 0; }
     .phone img { width: 100%; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; }
     @media (min-width: 980px) { .phone { margin: 28px 0 0; } }
 
     /* try */
-    .cards { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 48px; grid-template-columns: 1fr; }
+    .cards { display: grid; gap: 14px; margin-top: 48px; grid-template-columns: 1fr; }
     @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1000px) { .cards { grid-template-columns: repeat(3, 1fr); } }
-    .card { background: var(--black); padding: 26px 22px 28px; min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; transition: background .15s; }
-    .card:hover { background: var(--surface); }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--raio-g); padding: 26px 22px 28px; min-height: 190px; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; transition: background var(--duration-rapido) var(--ease-suave), border-color var(--duration-rapido) var(--ease-suave); }
+    .card:hover { background: var(--surface-2); border-color: var(--line-strong); }
     .card .label { color: var(--red); }
     .card h3 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; margin-top: 12px; }
     .card p { margin: 8px 0 0; font-size: 14px; color: var(--text-4); line-height: 1.55; }
     .card .go { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--white); display: inline-flex; align-items: center; gap: 8px; }
-    .card .go::after { content: "→"; color: var(--red); }
-    .card.cta { background: var(--red-fundo); color: #fff; }
+    .card .go::after { content: "→"; color: var(--red); display: inline-block; transition: transform var(--duration-padrao) var(--ease-mola); }
+    .card:hover .go::after { transform: translateX(5px); }
+    .card.cta { background: var(--red-fundo); border-color: transparent; color: #fff; }
+    .card.cta:focus-visible { outline-color: #fff; }
     .card.cta .label, .card.cta p, .card.cta .go::after { color: #fff; }
-    .card.cta:hover { background: #0B6542; }
+    .card.cta:hover { background: #0B6542; border-color: transparent; }
     .portas { display: grid; gap: 22px; margin-top: 48px; grid-template-columns: 1fr; }
     @media (min-width: 720px) { .portas { grid-template-columns: 1fr 1fr; } }
-    .porta { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: center; border: 1px solid var(--line); background: var(--surface); padding: 20px; min-width: 0; }
+    .porta { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: center; border: 1px solid var(--line); border-radius: var(--raio-g); background: var(--surface); padding: 22px; min-width: 0; transition: border-color var(--duration-rapido) var(--ease-suave), background var(--duration-rapido) var(--ease-suave); }
+    .porta:hover { border-color: var(--line-strong); background: var(--surface-2); }
     @media (min-width: 480px) { .porta { grid-template-columns: 150px minmax(0, 1fr); } }
     .porta > div { min-width: 0; }
     .porta .go, .card .go { overflow-wrap: anywhere; }
@@ -157,9 +187,9 @@
     .note { margin: 28px 0 0; font-size: 13px; color: var(--text-5); line-height: 1.6; max-width: 760px; }
 
     /* how it's built */
-    .nums { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 48px; grid-template-columns: repeat(2, 1fr); }
+    .nums { display: grid; gap: 14px; margin-top: 48px; grid-template-columns: repeat(2, 1fr); }
     @media (min-width: 900px) { .nums { grid-template-columns: repeat(4, 1fr); } }
-    .num { background: var(--panel); padding: 28px 22px 26px; }
+    .num { background: var(--surface); border: 1px solid var(--line); border-radius: var(--raio-g); padding: 28px 22px 26px; min-width: 0; }
     .num b { display: block; font-size: clamp(34px, 4vw, 52px); font-weight: 900; letter-spacing: -.03em; line-height: 1; }
     .num span { display: block; margin-top: 10px; font-size: 13px; color: var(--text-3); line-height: 1.5; }
     .cols { display: grid; gap: 40px; margin-top: 56px; grid-template-columns: 1fr; }
@@ -167,7 +197,7 @@
     .cols h3 { font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
     .cols p { margin: 12px 0 0; font-size: 15px; line-height: 1.68; color: var(--text-2); }
     .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .stack span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--text-2); border: 1px solid var(--line-strong); padding: 7px 10px; }
+    .stack span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--text-2); border: 1px solid var(--line-strong); border-radius: var(--raio-p); padding: 7px 10px; }
     .links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
 
     /* who */
@@ -175,7 +205,7 @@
     @media (min-width: 900px) { .who { grid-template-columns: minmax(0, 1fr) 380px; } }
     .who .horse { position: relative; min-height: 260px; }
     .who .horse img { display: block; width: 100%; max-width: 260px; margin: 0 auto; position: relative; z-index: 1; }
-    .who .horse::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 50%, rgba(25,195,125,.30), rgba(91,46,230,0) 70%); pointer-events: none; }
+    .who .horse::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 50%, rgba(25,195,125,.30), rgba(25,195,125,0) 70%); pointer-events: none; }
 
     .band { background: var(--red-fundo); color: #fff; position: relative; overflow: hidden; }
     .band .wrap { display: grid; gap: 28px; grid-template-columns: 1fr; align-items: center; padding-top: 64px; padding-bottom: 64px; position: relative; }
@@ -187,15 +217,34 @@
     .band .btn.white:hover { background: #0A0A0A; color: #fff; }
     .band .btn.line { border-color: rgba(255,255,255,.55); color: #fff; }
     .band .btn.line:hover { background: rgba(255,255,255,.12); }
+    .band a:focus-visible { outline-color: #fff; }
     .band .emblem { position: absolute; right: -40px; top: -20px; height: 140%; opacity: .14; pointer-events: none; }
     .band .emblem img { height: 100%; width: auto; }
     footer { padding: 40px 0 48px; color: var(--text-5); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
     footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between; }
+    footer a { display: inline-block; padding: 14px 0; overflow-wrap: anywhere; }
     footer a:hover { color: var(--white); }
 
-    [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+    /* A ENTRADA (molde, ADR-211): cada bloco sobe 12 px e assenta quando chega à tela, na curva suave e na velocidade
+       padrão do app (420 ms), os irmãos um depois do outro (60 ms). O texto do topo entra ao abrir a página. Só
+       `transform` e `opacity`. Quem pediu menos movimento ao sistema vê tudo no lugar, sem animação e sem transição. */
+    [data-reveal] { opacity: 0; transform: translateY(12px); transition: opacity var(--duration-padrao) var(--ease-suave), transform var(--duration-padrao) var(--ease-suave); }
     [data-reveal].in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+    [data-reveal]:nth-child(2) { transition-delay: 60ms; }
+    [data-reveal]:nth-child(3) { transition-delay: 120ms; }
+    [data-reveal]:nth-child(4) { transition-delay: 180ms; }
+    [data-reveal]:nth-child(n+5) { transition-delay: 240ms; }
+    .hero .wrap > div:first-child > * { animation: sobe var(--duration-padrao) var(--ease-suave) both; }
+    .hero .wrap > div:first-child > :nth-child(2) { animation-delay: 60ms; }
+    .hero .wrap > div:first-child > :nth-child(3) { animation-delay: 120ms; }
+    .hero .wrap > div:first-child > :nth-child(4) { animation-delay: 180ms; }
+    .hero .wrap > div:first-child > :nth-child(5) { animation-delay: 240ms; }
+    @keyframes sobe { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      [data-reveal] { opacity: 1; transform: none; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -203,7 +252,7 @@
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Sócia">
-      <img src="/assets/icone.svg" alt="" width="34" height="34" />
+      <span class="estrela-viva" aria-hidden="true"><svg viewBox="-120 -120 240 240" fill="none"><path d="M0,-108 C20,-45 45,-20 108,0 C45,20 20,45 0,108 C-20,45 -45,20 -108,0 C-45,-20 -20,-45 0,-108 Z" fill="var(--marca-ouro)" stroke="var(--marca-tinta)" stroke-width="8" stroke-linejoin="round"/><circle cx="-17" cy="-6" r="9" fill="var(--marca-tinta)"/><path d="M9,-6 H27" stroke="var(--marca-tinta)" stroke-width="7" stroke-linecap="round"/><path d="M-12,16 Q4,27 18,13" stroke="var(--marca-tinta)" stroke-width="7" stroke-linecap="round"/></svg></span>
       <b>Sócia</b>
     </a>
     <nav>
@@ -257,12 +306,12 @@
 <section class="alt" id="tese">
   <div class="wrap pad">
     <span class="label"><span lang-block="pt">A ideia</span><span lang-block="en">The idea</span><span lang-block="es">La idea</span></span>
-    <h2>
+    <h2 data-reveal>
       <span lang-block="pt">A mesma tela. Outro negócio.</span>
       <span lang-block="en">Same screen. Different business.</span>
       <span lang-block="es">La misma pantalla. Otro negocio.</span>
     </h2>
-    <p class="lead">
+    <p class="lead" data-reveal>
       <span lang-block="pt">As etapas do quadro, o que se anota sobre cada atendimento, os cargos, as formas de pagamento e as mesas são dados que o dono define. Nenhuma linha de código muda entre uma pizzaria e um pet shop.</span>
       <span lang-block="en">Board stages, what gets recorded per job, roles, payment methods and tables are data the owner defines. Not a single line of code changes between a pizzeria and a pet shop.</span>
       <span lang-block="es">Las etapas del tablero, lo que se anota de cada trabajo, los cargos, las formas de pago y las mesas son datos que define el dueño. Ni una línea de código cambia entre una pizzería y un pet shop.</span>
@@ -292,7 +341,7 @@
 <section id="tela">
   <div class="wrap pad">
     <span class="label"><span lang-block="pt">O produto</span><span lang-block="en">The product</span><span lang-block="es">El producto</span></span>
-    <h2>
+    <h2 data-reveal>
       <span lang-block="pt">O dia inteiro, do balcão ao fechamento.</span>
       <span lang-block="en">The whole day, from the counter to the close.</span>
       <span lang-block="es">El día entero, del mostrador al cierre.</span>
@@ -315,12 +364,12 @@
 <section class="alt" id="experimente">
   <div class="wrap pad">
     <span class="label"><span lang-block="pt">Experimente agora</span><span lang-block="en">Try it now</span><span lang-block="es">Pruébalo ahora</span></span>
-    <h2>
+    <h2 data-reveal>
       <span lang-block="pt">Sete negócios de exemplo, abertos no ar.</span>
       <span lang-block="en">Seven sample businesses, live right now.</span>
       <span lang-block="es">Siete negocios de ejemplo, abiertos en línea.</span>
     </h2>
-    <p class="lead">
+    <p class="lead" data-reveal>
       <span lang-block="pt">Cada negócio na Sócia ganha um link. O cliente abre no celular, vê o cardápio ou os serviços, pede, marca a hora ou entra na fila, e acompanha sem criar conta. Estes sete são fictícios e ficam vivos todos os dias, com movimento sorteado no horário de Salvador.</span>
       <span lang-block="en">Every business on Sócia gets a public link. Customers open it on their phone, see the menu or services, order, book a time or join the queue, and track it without an account. These seven are fictional and kept alive every day, with activity generated on Salvador time.</span>
       <span lang-block="es">Cada negocio en Sócia recibe un enlace. El cliente lo abre en el celular, ve la carta o los servicios, pide, reserva la hora o entra en la fila, y sigue su pedido sin crear cuenta. Estos siete son ficticios y se mantienen vivos todos los días, con movimiento sorteado en el horario de Salvador.</span>
@@ -382,12 +431,12 @@
 <section id="feito">
   <div class="wrap pad">
     <span class="label"><span lang-block="pt">Como é feito</span><span lang-block="en">How it's built</span><span lang-block="es">Cómo se hace</span></span>
-    <h2>
+    <h2 data-reveal>
       <span lang-block="pt">Uma pessoa, agentes de IA, e tudo escrito.</span>
       <span lang-block="en">One person, AI agents, and everything written down.</span>
       <span lang-block="es">Una persona, agentes de IA, y todo por escrito.</span>
     </h2>
-    <p class="lead">
+    <p class="lead" data-reveal>
       <span lang-block="pt">A Sócia é construída por um desenvolvedor só, com o Claude Code como método de trabalho e não como autocompletar: cada decisão vira um registro, guardas automáticas recusam publicar quando uma regra quebra, e baterias de teste andam o dia inteiro de negócios fictícios anotando o que está certo e o que está errado.</span>
       <span lang-block="en">Sócia is built by one developer, using Claude Code as a working method rather than autocomplete: every decision becomes a written record, scripted guards refuse to deploy when a rule breaks, and test batteries walk a full day of fictional businesses, logging what's right and what's wrong.</span>
       <span lang-block="es">Sócia la construye un solo desarrollador, con Claude Code como método de trabajo y no como autocompletar: cada decisión queda en un registro, guardas automáticas se niegan a publicar cuando una regla se rompe, y baterías de pruebas recorren el día entero de negocios ficticios anotando lo que está bien y lo que está mal.</span>
@@ -419,12 +468,12 @@
 <section class="alt" id="dados">
   <div class="wrap pad">
     <span class="label"><span lang-block="pt">Seus dados</span><span lang-block="en">Your data</span><span lang-block="es">Tus datos</span></span>
-    <h2>
+    <h2 data-reveal>
       <span lang-block="pt">O que a Sócia guarda, onde, e quem vê.</span>
       <span lang-block="en">What Sócia stores, where, and who sees it.</span>
       <span lang-block="es">Qué guarda Sócia, dónde, y quién lo ve.</span>
     </h2>
-    <p class="lead">
+    <p class="lead" data-reveal>
       <span lang-block="pt">Os dados do seu negócio são do seu negócio. Aqui está o que é verdade hoje, em poucas linhas.</span>
       <span lang-block="en">Your business's data belongs to your business. Here is what is true today, in a few lines.</span>
       <span lang-block="es">Los datos de tu negocio son de tu negocio. Esto es lo que es verdad hoy, en pocas líneas.</span>
@@ -462,12 +511,12 @@
   <div class="wrap pad who">
     <div>
       <span class="label"><span lang-block="pt">Quem faz</span><span lang-block="en">Who's behind it</span><span lang-block="es">Quién lo hace</span></span>
-      <h2>
+      <h2 data-reveal>
         <span lang-block="pt">Feito em Vancouver, para Salvador.</span>
         <span lang-block="en">Built in Vancouver, for Salvador.</span>
         <span lang-block="es">Hecho en Vancouver, para Salvador.</span>
       </h2>
-      <p class="lead">
+      <p class="lead" data-reveal>
         <span lang-block="pt">João Victor Ferrari Fonseca, fundador e desenvolvedor. A família dele tem um pet shop em Salvador; ele estuda Sistemas de Computação no BCIT, em Vancouver, e constrói a Sócia desde julho de 2026 para os negócios pequenos que ainda operam no papel e no WhatsApp.</span>
         <span lang-block="en">João Victor Ferrari Fonseca, founder and developer. His family runs a pet shop in Salvador, Brazil; he studies Computer Systems at BCIT in Vancouver, and has been building Sócia since July 2026 for the small businesses that still run on paper and WhatsApp.</span>
         <span lang-block="es">João Victor Ferrari Fonseca, fundador y desarrollador. Su familia tiene un pet shop en Salvador, Brasil; estudia Sistemas de Computación en el BCIT, en Vancouver, y construye Sócia desde julio de 2026 para los negocios pequeños que todavía operan con papel y WhatsApp.</span>
@@ -486,7 +535,7 @@
   <div class="wrap">
     <div>
       <span class="label"><span lang-block="pt">Para o seu negócio</span><span lang-block="en">For your business</span><span lang-block="es">Para tu negocio</span></span>
-      <h2>
+      <h2 data-reveal>
         <span lang-block="pt">Tem um negócio pequeno? Fala comigo.</span>
         <span lang-block="en">Run a small business? Let's talk.</span>
         <span lang-block="es">¿Tienes un negocio pequeño? Hablemos.</span>

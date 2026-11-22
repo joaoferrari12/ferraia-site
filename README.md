@@ -72,12 +72,40 @@ e a ADR-210 (o nome Sócia, o verde, o endereço novo).
 
 ## Forma
 
+**Este branch (`vitrine-molde-2`) é a PRÉVIA do molde, não publicada: espera o sim dele.** No ar continua o `main`
+(sem canto arredondado, grades de 1 px, botões do seletor de idioma com 36 × 33 px). As imagens lado a lado estão em
+`.tmp-sessao/molde/previa-vitrine-360.jpg` e `previa-vitrine-1366.jpg`.
+
 Fundo `#08080A`, Montserrat 900 em caixa alta, rótulos em IBM Plex Mono, **verde `#19C37D`** como acento (faixas em
-verde fundo `#0E7A50`), ouro `#F2A900` na palavra marcada do título, sem canto arredondado, grades de 1 px. A forma
-veio do site de marketing do pacote de marca de 15/09 (`FERRA-IA/knowledge-base/brand/handoff-2026-09-15/`); o
-vermelho `#E11D2E` e o cavalo saíram na ADR-210. **O nome é Sócia** (ADR-210, 19/11/2026; antes Ferra).
-A prévia do molde (cantos arredondados, alvos de 44 px, a Estrela viva) está no branch `molde-vitrine`, esperando o
-sim dele; no `main` os botões do seletor de idioma têm 36 × 33 px.
+verde fundo `#0E7A50`), ouro `#F2A900` na palavra marcada do título. A forma veio do site de marketing do pacote de
+marca de 15/09 (`FERRA-IA/knowledge-base/brand/handoff-2026-09-15/`); o vermelho `#E11D2E` e o cavalo saíram na
+ADR-210. **O nome é Sócia** (ADR-210, 19/11/2026; antes Ferra).
+
+A vitrine veste o **molde do app** (ADR-211), reaplicado em 21/11/2026 por cima do `main` de três línguas (o branch
+`molde-vitrine`, de 20/11, saiu de um `main` velho e ficou para trás):
+
+- **Tokens copiados do app** no `:root` do `site/index.html`, tema escuro de `ferra-os-web/src/index.css`: `--brand`,
+  `--brand-suave`, `--marca-ouro`, `--marca-tinta`, `--ease-mola`, `--ease-suave`, `--duration-rapido|padrao|lento`
+  (150, 420, 560 ms). Mudou lá, muda aqui. `--red` é o nome antigo do acento e só aponta para `--brand`.
+- **A Estrela viva no topo**, no lugar do ladrilho quadrado: o SVG de `components/ferra/marca.tsx` dentro do anel em
+  `--brand-suave` de `components/socia/estrela-viva.tsx`. Chega com mola, o anel respira duas vezes (4,8 s) e para; volta
+  a respirar com o ponteiro ou o foco em cima. Sem laço infinito, como no app (a Estrela parada não se mexe, WCAG 2.2.2).
+- **Cantos**: `--raio-p` 8 px (etiquetas da pilha, anel de foco), `--raio` 12 px (botão, aba, seletor de língua),
+  `--raio-g` 16 px (cartão, captura, porta, número). Os cartões de "Experimente" e os números de "Como é feito" são
+  cartões soltos com 14 px entre eles, no lugar da grade de 1 px.
+- **Alvos de toque**: 44 px de altura ou mais no topo (nome, seletor, Entrar, links do menu), nos botões (48 px), nas
+  abas e nos links do rodapé. No celular os botões do seletor estreitam para caber com o nome (36 px de largura a 320,
+  40 a 360, 44 de 390 em diante), sempre com 44 de altura.
+- **Respiro**: `--section-y` de 80 a 128 px (era 72 a 112); a margem lateral encolhe no celular (16 a 28 px; era 28 fixo).
+- **Movimento**: cada bloco com `data-reveal` sobe 12 px e assenta em 420 ms na curva suave, os irmãos com 60 ms de
+  diferença; o texto do topo entra ao abrir. Só `transform` e `opacity`. Com `prefers-reduced-motion` nenhuma animação
+  roda e nada fica escondido (medido: 0 animações, 0 blocos escondidos).
+- **Foco visível**: anel de 2 px na cor da marca (branco em cima da faixa verde).
+- Sombra leve nas capturas (era `0 60px 120px`), nenhum gradiente azul ou roxo, nenhum emoji.
+- A 404 ganhou só o canto de 12 px no botão, para não destoar.
+
+Medida: `.tmp-sessao/molde/verifica-vitrine-molde-2.mjs` (cópia do verificador das capturas, mais os alvos de 44 px, a
+folga entre nome, seletor e Entrar de 320 a 430 px, o menos-movimento e a entrada no fim da rolagem).
 
 ## Publicar
 
